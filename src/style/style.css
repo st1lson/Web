@@ -1,0 +1,115 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    font-size: 24px;
+}
+
+header {
+    height: 20%;
+    width: 100%;
+    background-color: cornflowerblue;
+}
+
+header>h1 {
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+header>p {
+    margin: 0;
+    padding: 0;
+    float: right;
+    margin-right: 20%;
+    font-style: italic;
+    background-color: white;
+}
+
+.container {
+    height: 60%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    background-color: deeppink;
+}
+
+.menu {
+    height: 100%;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+}
+
+.menuName {
+    height: 20%;
+    width: 100%;
+    line-height: 350%;
+    font-weight: bold;
+    background-color: lightgreen;
+}
+
+.menuContent {
+    height: 80%;
+    width: 100%;
+    background-color: darksalmon;
+}
+
+.menuContent>ol {
+    margin: 0;
+    padding: 0;
+}
+
+.menuContent>ol>li>a {
+    font-size: 32px;
+    line-height: 200%;
+    font-family: cursive;
+}
+
+.mainBlock {
+    height: 100%;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+}
+
+.textBlock {
+    height: 80%;
+    width: 100%;
+    background-color: white;
+}
+
+.titleBlock {
+    height: 20%;
+    width: 100%;
+    background-color: lightgreen;
+}
+
+.addBlock {
+    height: 100%;
+    width: 20%;
+    background-color: darksalmon;
+}
+
+footer {
+    height: 20%;
+    width: 100%;
+    background-color: cornflowerblue;
+}
+
+footer>h2 {
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+footer>p {
+    float: right;
+    margin-right: 20%;
+    font-style: italic;
+    background-color: white;
+}
