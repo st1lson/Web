@@ -35,7 +35,6 @@ header>p {
     width: 100%;
     display: flex;
     flex-direction: row;
-    background-color: deeppink;
 }
 
 .menu {
@@ -59,15 +58,28 @@ header>p {
     background-color: darksalmon;
 }
 
-.menuContent>ol {
+.menuContent>ul {
     margin: 0;
-    padding: 0;
+    padding: 5% 0;
 }
 
-.menuContent>ol>li>a {
+.menuContent>ul>li {
+    list-style: none;
+    margin: 0;
+    padding: 5%;
+    height: 15%;
+    width: 90%;
+}
+
+.menuContent>ul>li>a {
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
     font-size: 32px;
-    line-height: 200%;
-    font-family: cursive;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: cornflowerblue;
+    color: black;
+    display: inline-block;
 }
 
 .mainBlock {
