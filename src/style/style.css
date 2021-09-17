@@ -30,7 +30,7 @@ header>p {
     background-color: white;
 }
 
-.container {
+main {
     height: 60%;
     width: 100%;
     display: flex;
@@ -101,7 +101,7 @@ header>p {
     background-color: lightgreen;
 }
 
-.addBlock {
+aside {
     height: 100%;
     width: 20%;
     background-color: darksalmon;
