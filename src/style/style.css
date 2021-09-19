@@ -1,33 +1,57 @@
+:root {
+    --default-margin: 0;
+    --default-padding: 0;
+    --default-font-size: 24px;
+    --header-bg-color: cornflowerblue;
+    --header-h-color: white;
+    --header-h-font-family: Verdana, Geneva, Tahoma, sans-serif;
+    --header-p-bg-color: white;
+    --menu-name-bg-color: lightgreen;
+    --menu-content-ul-padding: 5% 0;
+    --menu-content-ul-li-padding: 5%;
+    --menu-content-ul-li-a-font-size: 32px;
+    --menu-content-ul-li-a-font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    --menu-content-ul-li-a-bg-color: cornflowerblue;
+    --menu-content-ul-li-a-color: black;
+    --menu-content-bg-color: darksalmon;
+    --text-block-bg-color: white;
+    --title-block-bg-color: lightgreen;
+    --aside-bg-color: darksalmon;
+    --footer-bg-color: cornflowerblue;
+    --footer-h-color: white;
+    --footer-p-bg-color: white;
+}
+
 html, body {
-    margin: 0;
-    padding: 0;
+    margin: var(--default-margin);
+    padding: var(--default-padding);
     height: 100%;
     width: 100%;
     text-align: center;
-    font-size: 24px;
+    font-size: var(--default-font-size);
 }
 
 header {
     height: 20%;
     width: 100%;
-    background-color: cornflowerblue;
+    background-color: var(--header-bg-color);
 }
 
 header>h1 {
-    margin: 0;
-    padding: 0;
-    color: white;
+    margin: var(--default-margin);
+    padding: var(--default-padding);
+    color: var(--header-h-color);
     font-weight: bold;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: var(--header-h-font-family);
 }
 
 header>p {
-    margin: 0;
-    padding: 0;
+    margin: var(--default-margin);
+    padding: var(--default-padding);
     float: right;
     margin-right: 20%;
     font-style: italic;
-    background-color: white;
+    background-color: var(--header-p-bg-color);
 }
 
 main {
@@ -49,24 +73,24 @@ main {
     width: 100%;
     line-height: 350%;
     font-weight: bold;
-    background-color: lightgreen;
+    background-color: var(--menu-name-bg-color);
 }
 
 .menuContent {
     height: 80%;
     width: 100%;
-    background-color: darksalmon;
+    background-color: var(--menu-content-bg-color);
 }
 
 .menuContent>ul {
-    margin: 0;
-    padding: 5% 0;
+    margin: var(--default-margin);
+    padding: var(--menu-content-ul-padding)
 }
 
 .menuContent>ul>li {
     list-style: none;
-    margin: 0;
-    padding: 5%;
+    margin: var(--default-margin);
+    padding: var(--menu-content-ul-li-padding);
     height: 15%;
     width: 90%;
 }
@@ -74,11 +98,10 @@ main {
 .menuContent>ul>li>a {
     height: 100%;
     width: 100%;
-    text-decoration: none;
-    font-size: 32px;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    background-color: cornflowerblue;
-    color: black;
+    font-size: var(--menu-content-ul-li-a-font-size);
+    font-family: var(--menu-content-ul-li-a-font-family);
+    background-color: var(--menu-content-ul-li-a-bg-color);
+    color: var(--menu-content-ul-li-a-color);
     display: inline-block;
 }
 
@@ -92,36 +115,36 @@ main {
 .textBlock {
     height: 80%;
     width: 100%;
-    background-color: white;
+    background-color: var(--text-block-bg-color);
 }
 
 .titleBlock {
     height: 20%;
     width: 100%;
-    background-color: lightgreen;
+    background-color: var(--title-block-bg-color);
 }
 
 aside {
     height: 100%;
     width: 20%;
-    background-color: darksalmon;
+    background-color: var(--aside-bg-color);
 }
 
 footer {
     height: 20%;
     width: 100%;
-    background-color: cornflowerblue;
+    background-color: var(--footer-bg-color);
 }
 
 footer>h2 {
     margin: 0;
     padding: 0;
-    color: white;
+    color: var(--footer-h-color);
 }
 
 footer>p {
     float: right;
     margin-right: 20%;
     font-style: italic;
-    background-color: white;
+    background-color: var(--footer-p-bg-color);
 }
