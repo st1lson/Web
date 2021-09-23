@@ -1,11 +1,9 @@
 {
-  "extends": [
-    "stylelint-config-prettier"
-  ],
-  "plugins": [ "stylelint-declaration-use-variable" ],
-  "rules": {
-    "indentation": "tab",
-    "number-leading-zero": null,
-    "no-missing-end-of-source-newline": true
-  }
+    "extends": ["stylelint-config-prettier"],
+    "plugins": ["stylelint-declaration-use-variable"],
+    "rules": {
+        "indentation": "tab",
+        "number-leading-zero": null,
+        "no-missing-end-of-source-newline": true
+    }
 }
