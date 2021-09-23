@@ -1,150 +1,148 @@
 :root {
-    --default-margin: 0;
-    --default-padding: 0;
-    --default-font-size: 24px;
-    --header-bg-color: cornflowerblue;
-    --header-h-color: white;
-    --header-h-font-family: Verdana, Geneva, Tahoma, sans-serif;
-    --header-p-bg-color: white;
-    --menu-name-bg-color: lightgreen;
-    --menu-content-ul-padding: 5% 0;
-    --menu-content-ul-li-padding: 5%;
-    --menu-content-ul-li-a-font-size: 32px;
-    --menu-content-ul-li-a-font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    --menu-content-ul-li-a-bg-color: cornflowerblue;
-    --menu-content-ul-li-a-color: black;
-    --menu-content-bg-color: darksalmon;
-    --text-block-bg-color: white;
-    --title-block-bg-color: lightgreen;
-    --aside-bg-color: darksalmon;
-    --footer-bg-color: cornflowerblue;
-    --footer-h-color: white;
-    --footer-p-bg-color: white;
+  --default-margin: 0;
+  --default-padding: 0;
+  --default-font-size: 24px;
+  --header-bg-color: cornflowerblue;
+  --header-h-color: white;
+  --header-h-font-family: Verdana, Geneva, Tahoma, sans-serif;
+  --header-p-bg-color: white;
+  --menu-name-bg-color: lightgreen;
+  --menu-content-ul-padding: 5% 0;
+  --menu-content-ul-li-padding: 5%;
+  --menu-content-ul-li-a-font-size: 32px;
+  --menu-content-ul-li-a-font-family: "Trebuchet MS", "Lucida Sans Unicode",
+    "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  --menu-content-ul-li-a-bg-color: cornflowerblue;
+  --menu-content-ul-li-a-color: black;
+  --menu-content-bg-color: darksalmon;
+  --text-block-bg-color: white;
+  --title-block-bg-color: lightgreen;
+  --aside-bg-color: darksalmon;
+  --footer-bg-color: cornflowerblue;
+  --footer-h-color: white;
+  --footer-p-bg-color: white;
 }
 
-html, body {
-    margin: var(--default-margin);
-    padding: var(--default-padding);
-    height: 100%;
-    width: 100%;
-    text-align: center;
-    font-size: var(--default-font-size);
+html,
+body {
+  height: 100%;
+  margin: var(--default-margin);
+  padding: var(--default-padding);
+  text-align: center;
+  align-items: center;
+  font-size: var(--default-font-size);
 }
 
 header {
-    height: 20%;
-    width: 100%;
-    background-color: var(--header-bg-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--header-bg-color);
 }
 
-header>h1 {
-    margin: var(--default-margin);
-    padding: var(--default-padding);
-    color: var(--header-h-color);
-    font-weight: bold;
-    font-family: var(--header-h-font-family);
+header > h1 {
+  display: inline;
+  padding-left: 10%;
+  font-weight: bold;
+  color: var(--header-h-color);
+  font-family: var(--header-h-font-family);
 }
 
-header>p {
-    margin: var(--default-margin);
-    padding: var(--default-padding);
-    float: right;
-    margin-right: 20%;
-    font-style: italic;
-    background-color: var(--header-p-bg-color);
+header > p {
+  display: inline;
+  float: right;
+  margin-right: 20%;
+  font-style: italic;
+  background-color: var(--header-p-bg-color);
 }
 
 main {
-    height: 60%;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
+  min-height: 60%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .menu {
-    height: 100%;
-    width: 20%;
-    display: flex;
-    flex-direction: column;
+  width: 20%;
+  display: flex;
+  flex-direction: column;
 }
 
 .menuName {
-    height: 20%;
-    width: 100%;
-    line-height: 350%;
-    font-weight: bold;
-    background-color: var(--menu-name-bg-color);
+  height: 10vh;
+  background-color: var(--menu-name-bg-color);
 }
 
 .menuContent {
-    height: 80%;
-    width: 100%;
-    background-color: var(--menu-content-bg-color);
+  flex-grow: 1;
+  background-color: var(--menu-content-bg-color);
 }
 
-.menuContent>ul {
-    margin: var(--default-margin);
-    padding: var(--menu-content-ul-padding)
+.menuContent > ul {
+  margin: var(--default-margin);
+  padding: var(--menu-content-ul-padding);
 }
 
-.menuContent>ul>li {
-    list-style: none;
-    margin: var(--default-margin);
-    padding: var(--menu-content-ul-li-padding);
-    height: 15%;
-    width: 90%;
+.menuContent > ul > li {
+  list-style: none;
+  margin: var(--default-margin);
+  padding: var(--menu-content-ul-li-padding);
+  height: 15%;
+  width: 90%;
 }
 
-.menuContent>ul>li>a {
-    height: 100%;
-    width: 100%;
-    font-size: var(--menu-content-ul-li-a-font-size);
-    font-family: var(--menu-content-ul-li-a-font-family);
-    background-color: var(--menu-content-ul-li-a-bg-color);
-    color: var(--menu-content-ul-li-a-color);
-    display: inline-block;
+.menuContent > ul > li > a {
+  height: 100%;
+  width: 100%;
+  font-size: var(--menu-content-ul-li-a-font-size);
+  font-family: var(--menu-content-ul-li-a-font-family);
+  background-color: var(--menu-content-ul-li-a-bg-color);
+  color: var(--menu-content-ul-li-a-color);
+  display: inline-block;
 }
 
 .mainBlock {
-    height: 100%;
-    width: 60%;
-    display: flex;
-    flex-direction: column;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .textBlock {
-    height: 80%;
-    width: 100%;
-    background-color: var(--text-block-bg-color);
+  min-height: 80%;
+  background-color: var(--text-block-bg-color);
 }
 
 .titleBlock {
-    height: 20%;
-    width: 100%;
-    background-color: var(--title-block-bg-color);
+  height: 10vh;
+  padding: 0;
+  background-color: var(--title-block-bg-color);
 }
 
 aside {
-    height: 100%;
-    width: 20%;
-    background-color: var(--aside-bg-color);
+  width: 20%;
+  background-color: var(--aside-bg-color);
 }
 
 footer {
-    height: 20%;
-    width: 100%;
-    background-color: var(--footer-bg-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--footer-bg-color);
 }
 
-footer>h2 {
-    margin: 0;
-    padding: 0;
-    color: var(--footer-h-color);
+footer > h2 {
+  display: inline;
+  float: left;
+  padding-left: 10%;
+  color: var(--footer-h-color);
 }
 
-footer>p {
-    float: right;
-    margin-right: 20%;
-    font-style: italic;
-    background-color: var(--footer-p-bg-color);
+footer > p {
+  display: inline;
+  float: right;
+  margin-right: 20%;
+  font-style: italic;
+  background-color: var(--footer-p-bg-color);
 }
