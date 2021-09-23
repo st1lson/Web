@@ -25,7 +25,7 @@
 
 html,
 body {
-  height: 100%;
+  min-height: 100%;
   margin: var(--default-margin);
   padding: var(--default-padding);
   text-align: center;
@@ -64,13 +64,13 @@ main {
 }
 
 .menu {
-  width: 20%;
+  min-width: 20%;
   display: flex;
   flex-direction: column;
 }
 
 .menuName {
-  height: 10vh;
+  min-height: 10vh;
   background-color: var(--menu-name-bg-color);
 }
 
@@ -103,25 +103,29 @@ main {
 }
 
 .mainBlock {
-  width: 60%;
+  max-width: 60%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
 .textBlock {
-  min-height: 80%;
   background-color: var(--text-block-bg-color);
 }
 
-.titleBlock {
-  height: 10vh;
-  padding: 0;
+.textBlock > img {
+  max-width: 120vh;
+  height: 100%;
+  object-fit: cover;
+}
+
+small {
+  min-height: 10vh;
   background-color: var(--title-block-bg-color);
 }
 
 aside {
-  width: 20%;
+  min-width: 20%;
   background-color: var(--aside-bg-color);
 }
 

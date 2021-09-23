@@ -1,4 +1,12 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-undefined
+function exit_proxy(){
+   if [ "$?" -ne 0 ] 
+   then
+      exit 1
+   fi
+
+   exit 0
+}
+trap exit_proxy EXIT
