@@ -3,13 +3,22 @@
         "browser": true,
         "es2021": true
     },
-    "extends": "metarhia",
-    "plugins": ["sonarjs"],
+    "extends": [
+        "metarhia",
+        "eslint:recommended",
+        "plugin:react/recommended"
+    ],
+    "plugins": ["sonarjs", "react"],
     "parserOptions": {
-        "ecmaVersion": 12
+        "ecmaVersion": 12,
+        "jsx": true,
+        "sourceType": "module"
     },
     "rules": {
         "sonarjs/cognitive-complexity": ["error", 15],
-        "indent": ["error", "tab"]
+        "indent": ["error", "tab"],
+        "no-extra-parens": ["error", "all", { "ignoreJSX": "multi-line" }],
+        "react/prop-types": 0,
+        "react/destructuring-assignment": [2, "always"]
     }
 }
