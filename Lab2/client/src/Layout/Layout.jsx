@@ -10,7 +10,12 @@ const Layout = props => {
 			<header>
 				<p>
 					<a href="https://github.com/st1lson/Web/tree/lab2">
-						<img src={logo} className={Style.Img} alt="logo" width="100" height="100"/>
+						<img
+							src={logo}
+							className={Style.Img}
+							alt="logo"
+							width="100"
+							height="100"/>
 					</a>
 				</p>
 				<h1>Mail sender</h1>

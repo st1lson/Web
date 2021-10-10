@@ -8,13 +8,18 @@
 	height: 65px;
 	width: 250px;
 	line-height: 65px;
+	border: 2px solid $font-color;
 	border-radius: 10px;
-	border: none;
-	box-shadow: 1px 1px 0px 2px $button-shadow-color;
 	background: $button-color;
 	cursor: pointer;
+
+	&:hover {
+		border: 3px solid $button-disabled-shadow-color;
+		background: $button-hover-background;
+	}
+
 	&:disabled {
 		background-color: $button-disabled-color;
-		box-shadow: 1px 1px 0px 2px $button-disabled-shadow-color;
+		border: 3px solid $button-disabled-shadow-color;
 	}
 }
