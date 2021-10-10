@@ -1,0 +1,15 @@
+html, body {
+	font-size: 1.15em;
+	text-align: center;
+	color: white;
+	min-height: 100%;
+	padding: 0;
+	margin: 0;
+	background-color: #23272A;
+	font-family: 'Roboto';
+}
+
+code {
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+		monospace;
+}

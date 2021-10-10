@@ -1,0 +1,18 @@
+.Button {
+	color: white;
+	text-align: center;
+	margin: 30px;
+	font-size: 18px;
+	height: 65px;
+	width: 250px;
+	line-height: 65px;
+	border-radius: 10px;
+	border: none;
+	box-shadow: 1px 1px 0px 2px #421C7C;
+	background: darkslateblue;
+	cursor: pointer;
+	&:disabled {
+		background-color: darkgrey;
+		box-shadow: 1px 1px 0px 2px black;
+	}
+}
