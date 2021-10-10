@@ -2,7 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = {
-	entry: './Lab2/client/src/index.jsx',
+	entry: './Lab2/client/src/index.js',
 	output: {
 		filename: 'bundle.[hash].js',
 		path: path.resolve(__dirname, './Lab2/client/dist'),
