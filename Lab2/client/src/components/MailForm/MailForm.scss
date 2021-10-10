@@ -1,0 +1,24 @@
+.Wrapper {
+	margin: auto;
+	max-width: 30rem;
+	padding-top: 4rem;
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	.Title {
+		font-weight: 500;
+		letter-spacing: .005em;
+	}
+	.Form {
+		width: 100%;
+		button {
+			padding-bottom: 4rem;
+			min-width: 10rem;
+			min-height: 1rem;
+		}
+		textarea {
+			resize: none;
+		}
+	}
+}
