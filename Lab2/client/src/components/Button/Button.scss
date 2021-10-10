@@ -1,5 +1,7 @@
+@use '/Lab2/client/src/global/global.scss' as *;
+
 .Button {
-	color: white;
+	color: $font-color;
 	text-align: center;
 	margin: 30px;
 	font-size: 18px;
@@ -8,11 +10,11 @@
 	line-height: 65px;
 	border-radius: 10px;
 	border: none;
-	box-shadow: 1px 1px 0px 2px #421C7C;
-	background: darkslateblue;
+	box-shadow: 1px 1px 0px 2px $button-shadow-color;
+	background: $button-color;
 	cursor: pointer;
 	&:disabled {
-		background-color: darkgrey;
-		box-shadow: 1px 1px 0px 2px black;
+		background-color: $button-disabled-color;
+		box-shadow: 1px 1px 0px 2px $button-disabled-shadow-color;
 	}
 }
