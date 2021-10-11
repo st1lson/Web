@@ -64,6 +64,9 @@ export default class MailForm extends Component {
     			}).
     		catch(
     			error => {
+    				this.setState({
+    					loading: false,
+    				});
     				alert(`Error with code ${error.status}`);
     			});
     }
@@ -101,12 +104,13 @@ export default class MailForm extends Component {
     					value={text}
     					onChange={event => this.onChange(event, 'text')}
     				/>
-    				{loading ? <Spinner /> : <Button
+    				<Button
     					name="submit"
     					type="submit"
     					disabled={loading}>
                         Submit
-    				</Button>}
+    				</Button>
+    				{loading ? <Spinner /> : ''}
     			</form>
     		</div>
     	);
