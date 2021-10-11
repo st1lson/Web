@@ -43,18 +43,9 @@ export default class MailForm extends Component {
     		return;
     	}
 
-    	this.setState(
-    		{
-    			loading: true,
-    		},
-    		() => {
-    			setTimeout(() => {
-    				this.setState({
-    					loading: false,
-    				});
-    			}, 5000);
-    		},
-    	);
+    	this.setState({
+    		loading: true,
+    	});
 
     	axios.
     		post('mails', {
@@ -64,6 +55,9 @@ export default class MailForm extends Component {
     		}).
     		then(
     			response => {
+    				this.setState({
+    					loading: false,
+    				});
     				alert(
     					`Mail successfully delivered to ${response.data.email}`,
     				);

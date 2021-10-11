@@ -18,12 +18,6 @@ namespace MailSenderAPI.Controllers
         [HttpPost]
         public async Task<ActionResult> PostMail(MailData mailData)
         {
-            if (string.IsNullOrEmpty(mailData.Text))
-            {
-                ModelState.AddModelError(nameof(mailData.Text), "Text field can not be empty");
-                return ValidationProblem();
-            }
-
             if (!MailAddress.TryCreate(mailData.Email, out MailAddress emailAddress))
             {
                 ModelState.AddModelError(nameof(mailData.Email), "Email is invalid");
