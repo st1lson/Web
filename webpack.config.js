@@ -7,11 +7,6 @@ module.exports = {
 		filename: 'bundle.[hash].js',
 		path: path.resolve(__dirname, './Lab2/client/dist'),
 	},
-	devServer: {
-		compress: true,
-		disableHostCheck: true,   // That solved it
-
-	},
 	plugins: [
 		new HtmlWebpackPlugin({
 			template: './Lab2/client/src/index.html',
