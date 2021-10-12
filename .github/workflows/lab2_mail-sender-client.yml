@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'mail-sender-client'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_64EEA9CD15D3490BBCC87330FD8592E1 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_C749C863831D400FA1D2273ED2E197E7 }}
           package: .
