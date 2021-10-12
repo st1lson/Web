@@ -32,16 +32,23 @@ namespace MailSenderAPI
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseCors(options => 
-                options.WithOrigins("http://localhost:8080")
-                .AllowAnyHeader()
-                .AllowAnyMethod());
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MailSenderAPI v1"));
+
+                app.UseCors(options =>
+                    options.WithOrigins("http://localhost:8080")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod());
+            }
+            else
+            {
+                app.UseCors(options =>
+                    options.WithOrigins("https://mail-sender-client.azurewebsites.net")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod());
             }
 
             app.UseHttpsRedirection();
