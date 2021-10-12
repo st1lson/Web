@@ -32,6 +32,7 @@ namespace MailSenderAPI
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            /*
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -43,13 +44,12 @@ namespace MailSenderAPI
                     .AllowAnyHeader()
                     .AllowAnyMethod());
             }
-            else
-            {
-                app.UseCors(options =>
-                    options.WithOrigins("https://mail-sender-client.azurewebsites.net")
-                    .AllowAnyHeader()
-                    .AllowAnyMethod());
-            }
+            */
+
+            app.UseCors(options =>
+                options.WithOrigins("https://mail-sender-client.azurewebsites.net")
+                .AllowAnyHeader()
+                .AllowAnyMethod());
 
             app.UseHttpsRedirection();
 
