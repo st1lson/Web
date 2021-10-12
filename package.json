@@ -12,7 +12,7 @@
         "lint:style:fix": "stylelint \"./**/*.css\" --fix",
         "prepare": "husky install",
         "start": "webpack-dev-server --hot --open --mode development",
-        "build": "webpack --config webpack.config.js --mode production"
+        "build": "webpack --mode production"
     },
     "repository": {
         "type": "git",
