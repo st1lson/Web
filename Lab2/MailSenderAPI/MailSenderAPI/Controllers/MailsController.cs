@@ -16,7 +16,7 @@ namespace MailSenderAPI.Controllers
         public MailsController(MailService mailService) => _mailService = mailService;
 
         [HttpPost]
-        public async Task<ActionResult> PostMail(MailData mailData)
+        public async Task<ActionResult> PostMail([FromBody] MailData mailData)
         {
             if (!MailAddress.TryCreate(mailData.Email, out MailAddress emailAddress))
             {
