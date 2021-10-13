@@ -13,9 +13,11 @@ namespace MailSenderAPI
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            _allowOrigins = "production";
         }
 
         public IConfiguration Configuration { get; }
+        private readonly string _allowOrigins;
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -28,6 +30,14 @@ namespace MailSenderAPI
 
             services.AddScoped<MailService>();
             services.AddCors();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(_allowOrigins,
+                    builder => builder.WithOrigins("https://mail-sender-client.azurewebsites.net")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod());
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -46,10 +56,7 @@ namespace MailSenderAPI
             }
             */
 
-            app.UseCors(options =>
-                options.WithOrigins("https://mail-sender-client.azurewebsites.net")
-                .AllowAnyHeader()
-                .AllowAnyMethod());
+            app.UseCors(_allowOrigins);   
 
             app.UseHttpsRedirection();
 

@@ -6,7 +6,7 @@ const instance = axios.create({
 	// Local
 	//baseURL: 'https://localhost:44396/api', // APS.NET Core Web API URL
 	headers: {
-		'Content-Type': 'application/json',
+		'Content-Type': 'application/json;charset=utf-8',
 	},
 });
 

@@ -29,16 +29,16 @@ export default class MailForm extends Component {
     onSubmit = event => {
     	event.preventDefault();
 
-    	const email = event.target.email.value;
-    	const author = event.target.author.value;
-    	const text = event.target.text.value;
+    	const emailAddress = event.target.email.value;
+    	const authorName = event.target.author.value;
+    	const content = event.target.text.value;
 
-    	if (!email) {
+    	if (!emailAddress) {
     		alert('Invalid email address');
     		return;
     	}
 
-    	if (!text) {
+    	if (!content) {
     		alert('Text block can not be empty');
     		return;
     	}
@@ -49,9 +49,9 @@ export default class MailForm extends Component {
 
     	axios.
     		post('mails', {
-    			email,
-    			author,
-    			text,
+    			email: emailAddress,
+    			author: authorName,
+    			text: content,
     		}).
     		then(
     			response => {

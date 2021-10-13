@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace MailSenderAPI.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
+    [Produces("application/json")]
     public class MailsController : Controller
     {
         private readonly MailService _mailService;
