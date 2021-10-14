@@ -3,7 +3,7 @@
         "browser": true,
         "es2021": true
     },
-    "extends": "metarhia",
+    "extends": ["metarhia", "plugin:sonarjs/recommended"],
     "plugins": ["sonarjs"],
     "parserOptions": {
         "ecmaVersion": 12
