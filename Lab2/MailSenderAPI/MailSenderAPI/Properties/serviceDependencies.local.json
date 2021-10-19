@@ -1,0 +1,10 @@
+{
+    "dependencies": {
+        "secrets2": {
+            "secretStore": null,
+            "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.KeyVault/vaults/mail-sender-credentials",
+            "type": "secrets.keyVault",
+            "connectionId": "VaultUri"
+        }
+    }
+}

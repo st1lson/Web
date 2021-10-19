@@ -1,9 +1,9 @@
-import React from 'react';
-import Style from './Layout.scss';
-import logo from './logo.png';
+import React from 'react'
+import Style from './Layout.scss'
+import logo from './logo.png'
 
-const Layout = props => {
-    const { children } = props;
+const Layout = (props) => {
+    const { children } = props
 
     return (
         <div>
@@ -15,16 +15,15 @@ const Layout = props => {
                             className={Style.Img}
                             alt="logo"
                             width="100"
-                            height="100"/>
+                            height="100"
+                        />
                     </a>
                 </p>
                 <h1>Mail sender</h1>
             </header>
-            <main>
-                {children}
-            </main>
+            <main>{children}</main>
         </div>
-    );
-};
+    )
+}
 
-export default Layout;
+export default Layout

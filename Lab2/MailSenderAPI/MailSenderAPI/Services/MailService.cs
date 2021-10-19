@@ -12,9 +12,8 @@ namespace MailSenderAPI.Services
 
         public MailService(IConfiguration configuration)
         {
-            IConfigurationSection configurationSection = configuration.GetSection("EmailData");
-            _login = configurationSection.GetSection("Login").Value;
-            _password = configurationSection.GetSection("Password").Value;
+            _login = configuration["Login"];
+            _password = configuration["Password"];
         }
 
         public async Task<bool> TrySendMailAsync(MailAddress mailAddress, string author, string text)
