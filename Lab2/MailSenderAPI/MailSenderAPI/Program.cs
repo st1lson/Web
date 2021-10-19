@@ -3,6 +3,8 @@ using Microsoft.Extensions.Hosting;
 using Azure.Identity;
 using Microsoft.Extensions.Configuration;
 using System;
+using Azure.Security.KeyVault.Secrets;
+using Azure.Extensions.AspNetCore.Configuration.Secrets;
 
 namespace MailSenderAPI
 {
@@ -17,8 +19,11 @@ namespace MailSenderAPI
             Host.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration((context, config) =>
                 {
-                    var keyVaultEndpoint = new Uri(Environment.GetEnvironmentVariable("VaultUri"));
-                    config.AddAzureKeyVault(keyVaultEndpoint, new DefaultAzureCredential());
+                    var builtConfig = config.Build();
+                    var secretClient = new SecretClient(
+                        new Uri(builtConfig["VaultUri"]),
+                        new DefaultAzureCredential());
+                    config.AddAzureKeyVault(secretClient, new KeyVaultSecretManager());
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {

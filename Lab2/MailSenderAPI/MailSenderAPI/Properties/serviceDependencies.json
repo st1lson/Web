@@ -1,8 +1,9 @@
 {
     "dependencies": {
-        "secrets1": {
-            "type": "secrets",
-            "connectionId": "VaultUri"
-        }
+      "secrets1": {
+        "type": "secrets",
+        "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.KeyVault/vaults/email-data-vault",
+        "connectionId": "VaultUri"
+      }
     }
 }
