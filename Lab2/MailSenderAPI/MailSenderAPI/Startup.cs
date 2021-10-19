@@ -50,6 +50,7 @@ namespace MailSenderAPI
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            /*
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -61,6 +62,7 @@ namespace MailSenderAPI
                     .AllowAnyHeader()
                     .AllowAnyMethod());
             }
+            */
 
             app.UseCors(_allowOrigins);   
 
