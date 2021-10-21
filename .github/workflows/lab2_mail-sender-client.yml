@@ -9,9 +9,6 @@ on:
             - lab2
     workflow_dispatch:
 
-env:
-    DEPLOY_URL: ${{secrets.DEPLOY_URL}}
-
 jobs:
     build:
         runs-on: windows-latest
