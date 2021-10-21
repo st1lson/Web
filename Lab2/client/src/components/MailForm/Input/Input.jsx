@@ -1,8 +1,8 @@
-import React from 'react'
-import Style from './Input.scss'
+import React from 'react';
+import Style from './Input.scss';
 
-const Input = (props) => {
-    const { labelText, placeholder, name, type, value, onChange } = props
+const Input = props => {
+    const { labelText, placeholder, name, type, value, onChange } = props;
     return (
         <div className={Style.Wrapper}>
             <label>{labelText}</label>
@@ -14,7 +14,7 @@ const Input = (props) => {
                 onChange={onChange}
             />
         </div>
-    )
-}
+    );
+};
 
-export default Input
+export default Input;

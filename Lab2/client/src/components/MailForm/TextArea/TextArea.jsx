@@ -1,8 +1,8 @@
-import React from 'react'
-import Style from './TextArea.scss'
+import React from 'react';
+import Style from './TextArea.scss';
 
-const TextArea = (props) => {
-    const { labelText, placeholder, name, type, value, onChange } = props
+const TextArea = props => {
+    const { labelText, placeholder, name, type, value, onChange } = props;
     return (
         <div className={Style.Wrapper}>
             <label>{labelText}</label>
@@ -14,7 +14,7 @@ const TextArea = (props) => {
                 onChange={onChange}
             />
         </div>
-    )
-}
+    );
+};
 
-export default TextArea
+export default TextArea;

@@ -2,7 +2,7 @@
     "extends": ["stylelint-config-prettier"],
     "plugins": ["stylelint-declaration-use-variable"],
     "rules": {
-        "indentation": "tab",
+        "indentation": 4,
         "number-leading-zero": null,
         "no-missing-end-of-source-newline": true
     }

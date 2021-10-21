@@ -1,13 +1,15 @@
 import axios from 'axios';
 
+const baseURL =
+    process.env.NODE_ENV.toLowerCase() === 'development'
+        ? 'https://localhost:44396/api'
+        : 'https://mail-sender-api.azurewebsites.net/api';
+
 const instance = axios.create({
-	// Deploy
-	baseURL: 'https://mail-sender-api.azurewebsites.net/api',
-	// Local
-	//baseURL: 'https://localhost:44396/api', // APS.NET Core Web API URL
-	headers: {
-		'Content-Type': 'application/json;charset=utf-8',
-	},
+    baseURL,
+    headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+    },
 });
 
 export default instance;

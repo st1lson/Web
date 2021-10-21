@@ -1,9 +1,9 @@
-import React from 'react'
-import Style from './Layout.scss'
-import logo from './logo.png'
+import React from 'react';
+import Style from './Layout.scss';
+import logo from './logo.png';
 
-const Layout = (props) => {
-    const { children } = props
+const Layout = props => {
+    const { children } = props;
 
     return (
         <div>
@@ -23,7 +23,7 @@ const Layout = (props) => {
             </header>
             <main>{children}</main>
         </div>
-    )
-}
+    );
+};
 
-export default Layout
+export default Layout;
