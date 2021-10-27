@@ -14,6 +14,8 @@ export default class MailForm extends Component {
             author: '',
             text: '',
             loading: false,
+            requestText: '',
+            requestEnded: false,
         };
     }
 
@@ -34,12 +36,18 @@ export default class MailForm extends Component {
         const content = event.target.text.value;
 
         if (!emailAddress) {
-            alert('Invalid email address');
+            this.setState({
+                requestEnded: true,
+                requestText: 'Invalid email address',
+            });
             return;
         }
 
         if (!content) {
-            alert('Text block can not be empty');
+            this.setState({
+                requestEnded: true,
+                requestText: 'Text block can not be empty',
+            });
             return;
         }
 
@@ -56,19 +64,22 @@ export default class MailForm extends Component {
             .then(response => {
                 this.setState({
                     loading: false,
+                    requestEnded: true,
+                    requestText: `Mail successfully delivered to ${response.data.email}`,
                 });
-                alert(`Mail successfully delivered to ${response.data.email}`);
             })
             .catch(error => {
                 this.setState({
                     loading: false,
+                    requestEnded: true,
+                    requestText: `Error with code ${error.status}`,
                 });
-                alert(`Error with code ${error.status}`);
             });
     };
 
     render() {
-        const { email, author, text, loading } = this.state;
+        const { email, author, text, loading, requestEnded, requestText } =
+            this.state;
         return (
             <div className={Style.Wrapper}>
                 <h1 className={Style.Title}>Type data below</h1>
@@ -103,6 +114,7 @@ export default class MailForm extends Component {
                     <Button name="submit" type="submit" disabled={loading}>
                         Submit
                     </Button>
+                    {requestEnded ? <p>{requestText}</p> : ''}
                     {loading ? <Spinner /> : ''}
                 </form>
             </div>
