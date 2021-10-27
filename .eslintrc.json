@@ -1,0 +1,15 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": ["metarhia", "plugin:sonarjs/recommended"],
+    "plugins": ["sonarjs"],
+    "parserOptions": {
+        "ecmaVersion": 12
+    },
+    "rules": {
+        "sonarjs/cognitive-complexity": ["error", 15],
+        "indent": ["error", 4]
+    }
+}

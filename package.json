@@ -1,0 +1,37 @@
+{
+    "name": "web",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "lint": "eslint . --no-error-on-unmatched-pattern --ignore-path .gitignore",
+        "lint:fix": "npm run lint -- --fix",
+        "format": "prettier --check . --ignore-path .gitignore",
+        "format:fix": "npm run format -- --write",
+        "lint:style": "stylelint \"./**/*.css\" --ignore-path .gitignore",
+        "lint:style:fix": "npm run lint:style -- --fix",
+        "prepare": "husky install"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/st1lson/Web.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/st1lson/Web/issues"
+    },
+    "homepage": "https://github.com/st1lson/Web#readme",
+    "devDependencies": {
+        "eslint": "^7.32.0",
+        "eslint-config-metarhia": "^7.0.1",
+        "eslint-plugin-import": "^2.24.2",
+        "eslint-plugin-sonarjs": "^0.10.0",
+        "husky": "^7.0.2",
+        "prettier": "^2.4.1",
+        "stylelint": "^13.13.1",
+        "stylelint-config-prettier": "^8.0.2",
+        "stylelint-config-sass-guidelines": "^8.0.0",
+        "stylelint-declaration-use-variable": "^1.7.3"
+    }
+}
