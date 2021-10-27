@@ -5,11 +5,11 @@
     "main": "index.js",
     "scripts": {
         "lint": "eslint . --no-error-on-unmatched-pattern --ignore-path .gitignore",
-        "lint:fix": "eslint . --fix --ignore-path .gitignore",
-        "format": "prettier --check .",
-        "format:fix": "prettier . --write",
-        "lint:style": "stylelint \"./**/*.css\"",
-        "lint:style:fix": "stylelint \"./**/*.css\" --fix",
+        "lint:fix": "npm run lint -- --fix",
+        "format": "prettier --check . --ignore-path .gitignore",
+        "format:fix": "npm run format -- --write",
+        "lint:style": "stylelint \"./**/*.css\" --ignore-path .gitignore",
+        "lint:style:fix": "npm run lint:style -- --fix",
         "prepare": "husky install"
     },
     "repository": {

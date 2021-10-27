@@ -10,6 +10,6 @@
     },
     "rules": {
         "sonarjs/cognitive-complexity": ["error", 15],
-        "indent": ["error", "tab"]
+        "indent": ["error", 4]
     }
 }
