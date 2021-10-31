@@ -36,7 +36,7 @@ export default class MailForm extends Component {
         if (!email) {
             this.setState({
                 requestEnded: true,
-                requestText: 'Invalid email address',
+                requestText: 'Email address field can not be empty',
             });
             return;
         }
