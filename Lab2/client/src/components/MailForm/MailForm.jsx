@@ -70,7 +70,7 @@ export default class MailForm extends Component {
                 this.setState({
                     loading: false,
                     requestEnded: true,
-                    requestText: `Error with code ${error.status}`,
+                    requestText: `${error.response.data}`,
                 });
             });
     };
@@ -78,6 +78,7 @@ export default class MailForm extends Component {
     render() {
         const { email, author, text, loading, requestEnded, requestText } =
             this.state;
+
         return (
             <div className={Style.Wrapper}>
                 <h1 className={Style.Title}>Type data below</h1>
