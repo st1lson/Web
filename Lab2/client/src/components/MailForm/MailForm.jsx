@@ -70,7 +70,7 @@ export default class MailForm extends Component {
                 this.setState({
                     loading: false,
                     requestEnded: true,
-                    requestText: `${error.response.data}`,
+                    requestText: error.response.data,
                 });
             });
     };
