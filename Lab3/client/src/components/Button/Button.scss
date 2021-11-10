@@ -1,0 +1,23 @@
+.Button {
+    color: white;
+    text-align: center;
+    margin: 30px;
+    font-size: 18px;
+    height: 65px;
+    width: 250px;
+    line-height: 65px;
+    border: 3px solid rgb(219, 75, 8);
+    border-radius: 10px;
+    background: rgb(116, 25, 202);
+    cursor: pointer;
+
+    &:hover {
+        border: 3px solid rgb(219, 75, 8);
+        background: rgb(63, 46, 163);
+    }
+
+    &:disabled {
+        background-color: rgb(50, 9, 88);
+        border: 3px solid rgb(219, 75, 8);
+    }
+}

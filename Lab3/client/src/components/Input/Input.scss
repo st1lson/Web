@@ -1,0 +1,18 @@
+.Wrapper {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding-top: 1rem;
+    label {
+        width: 40%;
+        text-align: left;
+    }
+    input {
+        font-size: 1.1em;
+        width: 60%;
+        min-height: 1.5rem;
+        max-height: 2rem;
+        border: 5px solid white;
+        border-radius: 0.5rem;
+    }
+}
