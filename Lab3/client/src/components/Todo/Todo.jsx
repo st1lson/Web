@@ -9,7 +9,7 @@ const Todo = props => {
                 <div className={Style.TodoWrapper}>
                     {children}
                 </div>
-                <button onClick={onClick}>
+                <button type="button" onClick={onClick}>
                     &#10006;
                 </button>
         </div>

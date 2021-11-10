@@ -10,6 +10,7 @@ export default class Form extends Component {
         this.state = {
             newTodo: '',
             todos: ['visit gym',
+                    'oleg',
                     'have a rest'],
             loading: false,
             date: '',
@@ -25,11 +26,18 @@ export default class Form extends Component {
         }
     };
 
-    todoClickHanlder = (event) => {
-        alert("Are you sure?");
+    todoClickHanlder = (event, element) => {
+        const { todos } = this.state;
+
+        let index = todos.indexOf(element);
+        todos.splice(index, 1);
+        this.setState({
+            todos
+        });
     }
 
     onSubmit = event => {
+        event.preventDefault();
         alert(event.target.value);
         console.log("sub");
     }
@@ -41,7 +49,8 @@ export default class Form extends Component {
             <div className={Style.Wrapper}>
                 <h1 className={Style.Title}>Todos</h1>
                 <form
-                    className={Style.Form}>
+                    className={Style.Form}
+                    >
                         <Input
                             labelText="Your todo:"
                             placeholder="Todo"
@@ -52,12 +61,12 @@ export default class Form extends Component {
                         />
                         <div className={Style.TodoWrapper}>
                             {todos.map(element => (
-                                <Todo onClick={event => this.todoClickHanlder(event)}>
+                                <Todo onClick={event => this.todoClickHanlder(event, element)}>
                                     {element}
                                 </Todo>
                             ))}
                         </div>
-                        <Button type="add" onClick={this.onSubmit} disabled={loading}>
+                        <Button type="submit" disabled={loading}>
                             Press to add
                         </Button>
                 </form>
