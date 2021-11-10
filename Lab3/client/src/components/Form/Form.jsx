@@ -9,9 +9,9 @@ export default class Form extends Component {
         super(props);
         this.state = {
             newTodo: '',
-            todos: ['visit gym', 'oleg', 'have a rest'],
+            todos: ['Todo123', 'visit gym', 'oleg', 'have a rest'],
+            toDelete: '',
             loading: false,
-            date: '',
         };
     }
 
@@ -25,27 +25,29 @@ export default class Form extends Component {
     };
 
     todoClickHanlder = (event, element) => {
-        const { todos } = this.state;
+        let { todos, toDelete } = this.state;
 
         let index = todos.indexOf(element);
+        toDelete = todos[index];
+        
         todos.splice(index, 1);
         this.setState({
             todos,
+            toDelete
         });
     };
 
     onSubmit = event => {
         event.preventDefault();
-                /*
-        This is an example snippet - you should consider tailoring it
-        to your service.
-        */
 
+        const { toDelete } = this.state;
+
+        console.log(toDelete);
         async function fetchGraphQL(operationsDoc, operationName, variables) {
             const result = await fetch(
                 'https://arriving-chamois-37.hasura.app/v1/graphql',
                 {
-                    header: {
+                    headers: {
                         'content-type': 'application/json',
                         'x-hasura-admin-secret':
                             'R1jLcaDv4iRAEpTV3FWXiYMizryCJGKHBt4LnAUrNRDJDBQ7wRCemsnVFy9AOgs8',
@@ -58,33 +60,40 @@ export default class Form extends Component {
                     }),
                 },
             );
-
+    
             return await result.json();
         }
-
+    
         const operationsDoc = `
             query MyQuery {
-            todo {
-                Task
-                Date
+                todo {
+                    Task
+                }
             }
-            }
+            mutation MyMutation {
+                delete_todo(where: {Task: {_eq: "${toDelete}"}) {
+                  affected_rows
+                }
+              }
         `;
-
+    
         function fetchMyQuery() {
             return fetchGraphQL(operationsDoc, 'MyQuery', {});
         }
-
+    
         async function startFetchMyQuery() {
             const { errors, data } = await fetchMyQuery();
-
+    
             if (errors) {
                 console.error(errors);
             }
 
-            console.log(data);
+            this.setState = {
+                todos: data.todo
+            }
+            console.log(data.todo);
         }
-
+    
         startFetchMyQuery();
     };
 
