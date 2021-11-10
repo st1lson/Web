@@ -39,6 +39,19 @@ export default class Form extends Component {
         console.log(item);
     };
 
+    addTodo = event => {
+        const { todos, newTodo } = this.state;
+
+        if (todos.includes(newTodo)) {
+            return;
+        }
+
+        todos.push(newTodo);
+        this.setState({
+            todos
+        });
+    };
+
     onSubmit = event => {
         event.preventDefault();
 
@@ -129,7 +142,9 @@ export default class Form extends Component {
                         value={newTodo}
                         onChange={event => this.onChange(event, 'newTodo')}
                     />
-                    <Button type="submit" disabled={loading}>
+                    <Button 
+                        onClick={event => this.addTodo(event)} 
+                        type="submit" disabled={loading}>
                         Press to add
                     </Button>
                 </form>
