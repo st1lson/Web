@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import Todo from '../Todo/Todo';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
@@ -9,9 +9,7 @@ export default class Form extends Component {
         super(props);
         this.state = {
             newTodo: '',
-            todos: ['visit gym',
-                    'oleg',
-                    'have a rest'],
+            todos: ['visit gym', 'oleg', 'have a rest'],
             loading: false,
             date: '',
         };
@@ -32,15 +30,63 @@ export default class Form extends Component {
         let index = todos.indexOf(element);
         todos.splice(index, 1);
         this.setState({
-            todos
+            todos,
         });
-    }
+    };
 
     onSubmit = event => {
         event.preventDefault();
-        alert(event.target.value);
-        console.log("sub");
-    }
+                /*
+        This is an example snippet - you should consider tailoring it
+        to your service.
+        */
+
+        async function fetchGraphQL(operationsDoc, operationName, variables) {
+            const result = await fetch(
+                'https://arriving-chamois-37.hasura.app/v1/graphql',
+                {
+                    header: {
+                        'content-type': 'application/json',
+                        'x-hasura-admin-secret':
+                            'R1jLcaDv4iRAEpTV3FWXiYMizryCJGKHBt4LnAUrNRDJDBQ7wRCemsnVFy9AOgs8',
+                    },
+                    method: 'POST',
+                    body: JSON.stringify({
+                        query: operationsDoc,
+                        variables: variables,
+                        operationName: operationName,
+                    }),
+                },
+            );
+
+            return await result.json();
+        }
+
+        const operationsDoc = `
+            query MyQuery {
+            todo {
+                Task
+                Date
+            }
+            }
+        `;
+
+        function fetchMyQuery() {
+            return fetchGraphQL(operationsDoc, 'MyQuery', {});
+        }
+
+        async function startFetchMyQuery() {
+            const { errors, data } = await fetchMyQuery();
+
+            if (errors) {
+                console.error(errors);
+            }
+
+            console.log(data);
+        }
+
+        startFetchMyQuery();
+    };
 
     render() {
         const { newTodo, todos, loading } = this.state;
@@ -48,27 +94,29 @@ export default class Form extends Component {
         return (
             <div className={Style.Wrapper}>
                 <h1 className={Style.Title}>Todos</h1>
-                <form
-                    className={Style.Form}
-                    >
-                        <Input
-                            labelText="Your todo:"
-                            placeholder="Todo"
-                            name="newTodo"
-                            type="text"
-                            value={newTodo}
-                            onChange={event => this.onChange(event, 'newTodo')}
-                        />
-                        <div className={Style.TodoWrapper}>
-                            {todos.map(element => (
-                                <Todo onClick={event => this.todoClickHanlder(event, element)}>
-                                    {element}
-                                </Todo>
-                            ))}
-                        </div>
-                        <Button type="submit" disabled={loading}>
-                            Press to add
-                        </Button>
+                <form className={Style.Form}
+                    onSubmit={this.onSubmit}>
+                    <Input
+                        labelText="Your todo:"
+                        placeholder="Todo"
+                        name="newTodo"
+                        type="text"
+                        value={newTodo}
+                        onChange={event => this.onChange(event, 'newTodo')}
+                    />
+                    <div className={Style.TodoWrapper}>
+                        {todos.map(element => (
+                            <Todo
+                                onClick={event =>
+                                    this.todoClickHanlder(event, element)
+                                }>
+                                {element}
+                            </Todo>
+                        ))}
+                    </div>
+                    <Button type="submit" disabled={loading}>
+                        Press to add
+                    </Button>
                 </form>
             </div>
         );

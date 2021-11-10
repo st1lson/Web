@@ -6,12 +6,10 @@ const Todo = props => {
 
     return (
         <div className={Style.Wrapper}>
-                <div className={Style.TodoWrapper}>
-                    {children}
-                </div>
-                <button type="button" onClick={onClick}>
-                    &#10006;
-                </button>
+            <div className={Style.TodoWrapper}>{children}</div>
+            <button type="button" onClick={onClick}>
+                &#10006;
+            </button>
         </div>
     );
 };
