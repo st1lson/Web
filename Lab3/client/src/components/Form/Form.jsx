@@ -25,24 +25,23 @@ export default class Form extends Component {
     };
 
     todoClickHanlder = (event, element) => {
-        let { todos, toDelete } = this.state;
+        const { todos } = this.state;
 
         let index = todos.indexOf(element);
-        toDelete = todos[index];
+        const item = todos[index];
         
         todos.splice(index, 1);
         this.setState({
             todos,
-            toDelete
+            toDelete: item
         });
+
+        console.log(item);
     };
 
     onSubmit = event => {
         event.preventDefault();
 
-        const { toDelete } = this.state;
-
-        console.log(toDelete);
         async function fetchGraphQL(operationsDoc, operationName, variables) {
             const result = await fetch(
                 'https://arriving-chamois-37.hasura.app/v1/graphql',
@@ -65,16 +64,23 @@ export default class Form extends Component {
         }
     
         const operationsDoc = `
-            query MyQuery {
+           query MyQuery {
                 todo {
                     Task
                 }
             }
-            mutation MyMutation {
-                delete_todo(where: {Task: {_eq: "${toDelete}"}) {
+
+            mutation deleteTask {
+                delete_todo(where: {Task: {_eq: "${this.state.toDelete}"}}) {
                   affected_rows
                 }
               }
+
+            mutation updateTask {
+                update_todo(where: {Task: {_eq: "ttttt"}}, _set: {Task: "ttt"}) {
+                  affected_rows
+                }
+            }
         `;
     
         function fetchMyQuery() {
@@ -85,13 +91,12 @@ export default class Form extends Component {
             const { errors, data } = await fetchMyQuery();
     
             if (errors) {
+                // handle those errors like a pro
                 console.error(errors);
             }
 
-            this.setState = {
-                todos: data.todo
-            }
-            console.log(data.todo);
+            // do something great with this precious data
+            console.log(data);
         }
     
         startFetchMyQuery();
@@ -104,15 +109,8 @@ export default class Form extends Component {
             <div className={Style.Wrapper}>
                 <h1 className={Style.Title}>Todos</h1>
                 <form className={Style.Form}
-                    onSubmit={this.onSubmit}>
-                    <Input
-                        labelText="Your todo:"
-                        placeholder="Todo"
-                        name="newTodo"
-                        type="text"
-                        value={newTodo}
-                        onChange={event => this.onChange(event, 'newTodo')}
-                    />
+                    onSubmit={this.onSubmit}
+                    method="Post">
                     <div className={Style.TodoWrapper}>
                         {todos.map(element => (
                             <Todo
@@ -123,6 +121,14 @@ export default class Form extends Component {
                             </Todo>
                         ))}
                     </div>
+                    <Input
+                        labelText="Your todo:"
+                        placeholder="Todo"
+                        name="newTodo"
+                        type="text"
+                        value={newTodo}
+                        onChange={event => this.onChange(event, 'newTodo')}
+                    />
                     <Button type="submit" disabled={loading}>
                         Press to add
                     </Button>
