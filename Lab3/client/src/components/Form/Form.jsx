@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import Todo from '../Todo/Todo';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
-import fetchMyQuery from './GraphQL/GraphQl';
 import Style from './Form.scss';
+import startFetchMyQuery from './GraphQL/GraphQl';
 
 export default class Form extends Component {
     constructor(props) {
@@ -41,10 +41,10 @@ export default class Form extends Component {
             request,
         });
 
-        fetchMyQuery(request);
+        startFetchMyQuery(request, item);
     };
 
-    addTodo = (event)=> {
+    addTodo = event => {
         const { todos, newTodo } = this.state;
         let { request } = this.state;
 
@@ -59,12 +59,11 @@ export default class Form extends Component {
             request,
         });
 
-        fetchMyQuery(request);
+        startFetchMyQuery(request, newTodo);
     };
 
     onSubmit = event => {
         event.preventDefault();
-
     };
 
     render() {
@@ -79,6 +78,7 @@ export default class Form extends Component {
                     <div className={Style.TodoWrapper}>
                         {todos.map(element => (
                             <Todo
+                                key={element}
                                 onClick={event =>
                                     this.todoClickHanlder(event, element)
                                 }>

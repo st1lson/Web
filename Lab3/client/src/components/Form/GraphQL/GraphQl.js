@@ -1,4 +1,6 @@
-export default function fetchMyQuery(request) {
+let value = '';
+
+function fetchMyQuery(request) {
     return fetchGraphQL(operationsDoc, request, {});
 }
 
@@ -6,11 +8,7 @@ async function fetchGraphQL(operationsDoc, operationName, variables) {
     const result = await fetch(
         'https://arriving-chamois-37.hasura.app/v1/graphql',
         {
-            headers: {
-                'content-type': 'application/json',
-                'x-hasura-admin-secret':
-                    'R1jLcaDv4iRAEpTV3FWXiYMizryCJGKHBt4LnAUrNRDJDBQ7wRCemsnVFy9AOgs8',
-            },
+            headers: setHeaders(),
             method: 'POST',
             body: JSON.stringify({
                 query: operationsDoc,
@@ -23,8 +21,10 @@ async function fetchGraphQL(operationsDoc, operationName, variables) {
     return await result.json();
 }
 
-async function startFetchMyQuery() {
-    const { errors, data } = await fetchMyQuery();
+export default async function startFetchMyQuery(request, item) {
+    value = item;
+    console.log(request, value);
+    const { errors, data } = await fetchMyQuery(request, item);
 
     if (errors) {
         // handle those errors like a pro
@@ -34,13 +34,12 @@ async function startFetchMyQuery() {
     // do something great with this precious data
 
     if (request === 'read') {
-        let newTodos = [];
-        let i = 0;
-        for (i = 0; i < data.todo.length; i++) {
+        const newTodos = [];
+        for (let i = 0; i < data.todo.length; i++) {
             newTodos.push(data.todo[i]['Task']);
         }
 
-        todos = newTodos;
+        return newTodos;
     }
 
     console.log(data);
@@ -56,13 +55,13 @@ const operationsDoc = `
     }
 
     mutation add {
-        insert_todo(objects: {Task: "${this.state.newTodo}"}) {
+        insert_todo(objects: {Task: "${value}"}) {
           affected_rows
         }
     }
 
     mutation delete {
-        delete_todo(where: {Task: {_eq: "${this.state.toDelete}"}}) {
+        delete_todo(where: {Task: {_eq: "${value}"}}) {
           affected_rows
         }
     }
@@ -73,3 +72,11 @@ const operationsDoc = `
         }
     }
 `;
+
+function setHeaders() {
+    return {
+        'content-type': 'application/json',
+        'x-hasura-admin-secret':
+            'R1jLcaDv4iRAEpTV3FWXiYMizryCJGKHBt4LnAUrNRDJDBQ7wRCemsnVFy9AOgs8',
+    };
+}
