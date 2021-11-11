@@ -6,6 +6,11 @@
     flex-direction: column;
     justify-content: center;
 
+    .TodoWrapper {
+        width: 100%;
+        max-height: 60rem;
+    }
+
     .ButtonWrapper {
         flex-direction: row;
     }

@@ -4,6 +4,7 @@ import Input from '../Input/Input';
 import Button from '../Button/Button';
 import Style from './Form.scss';
 import startFetchMyQuery from './GraphQL/GraphQl';
+import Popup from '../Popup/Popup';
 
 export default class Form extends Component {
     constructor(props) {
@@ -14,6 +15,9 @@ export default class Form extends Component {
             toDelete: '',
             request: 'read',
             loading: false,
+            inEdit: false,
+            elementInEdit: '',
+            editedElement: '',
         };
     }
 
@@ -62,6 +66,18 @@ export default class Form extends Component {
         startFetchMyQuery(request, { Task: { Task: newTodo } });
     };
 
+    editTodo = (event, element) => {
+        let { inEdit, elementInEdit } = this.state;
+
+        inEdit = true;
+        elementInEdit = element;
+
+        this.setState({
+            inEdit,
+            elementInEdit,
+        });
+    };
+
     onSubmit = event => {
         event.preventDefault();
     };
@@ -71,7 +87,9 @@ export default class Form extends Component {
 
         request = 'read';
 
-        startFetchMyQuery(request, {}).then(data => this.updateTodosData(data.todo));
+        startFetchMyQuery(request, {}).then(data =>
+            this.updateTodosData(data.todo),
+        );
     }
 
     updateTodosData(items) {
@@ -90,8 +108,44 @@ export default class Form extends Component {
         }
     }
 
+    popupClick = () => {
+        let { inEdit, request, elementInEdit, editedElement } = this.state;
+
+        console.log(editedElement);
+
+        if (!editedElement) {
+            this.setState({
+                inEdit: !inEdit,
+                elementInEdit: '',
+                editedElement: '',
+            });
+
+            return;
+        }
+
+        request = 'update';
+
+        startFetchMyQuery(request, {
+            oldTask: elementInEdit,
+            newTask: editedElement,
+        });
+
+        this.setState({
+            inEdit: !inEdit,
+            elementInEdit: '',
+            editedElement: '',
+        });
+    };
+
     render() {
-        const { newTodo, todos, loading } = this.state;
+        const {
+            newTodo,
+            todos,
+            loading,
+            inEdit,
+            elementInEdit,
+            editedElement,
+        } = this.state;
 
         return (
             <div className={Style.Wrapper}>
@@ -104,7 +158,10 @@ export default class Form extends Component {
                         {todos.map(element => (
                             <Todo
                                 key={element}
-                                onClick={event =>
+                                onClickEdit={event =>
+                                    this.editTodo(event, element)
+                                }
+                                onClickDelete={event =>
                                     this.todoClickHanlder(event, element)
                                 }>
                                 {element}
@@ -126,6 +183,20 @@ export default class Form extends Component {
                         Press to add
                     </Button>
                 </form>
+                {inEdit ? (
+                    <Popup
+                        labelText="New todo text:"
+                        placeholder={elementInEdit}
+                        name="editedElement"
+                        type="text"
+                        value={editedElement}
+                        onChange={event =>
+                            this.onChange(event, 'editedElement')
+                        }
+                        onClick={this.popupClick}></Popup>
+                ) : (
+                    ''
+                )}
             </div>
         );
     }
