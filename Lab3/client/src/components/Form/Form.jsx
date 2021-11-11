@@ -32,7 +32,7 @@ export default class Form extends Component {
 
         let index = todos.indexOf(element);
         const item = todos[index];
-        
+
         todos.splice(index, 1);
         request = 'delete';
         this.setState({
@@ -41,14 +41,14 @@ export default class Form extends Component {
             request,
         });
 
-        startFetchMyQuery(request, item);
+        startFetchMyQuery(request, { Task: item });
     };
 
     addTodo = event => {
         const { todos, newTodo } = this.state;
         let { request } = this.state;
 
-        if (todos.includes(newTodo)) {
+        if (todos.includes(newTodo) || !newTodo) {
             return;
         }
 
@@ -59,7 +59,7 @@ export default class Form extends Component {
             request,
         });
 
-        startFetchMyQuery(request, newTodo);
+        startFetchMyQuery(request, { Task: { Task: newTodo } });
     };
 
     onSubmit = event => {
@@ -72,7 +72,8 @@ export default class Form extends Component {
         return (
             <div className={Style.Wrapper}>
                 <h1 className={Style.Title}>Todos</h1>
-                <form className={Style.Form}
+                <form
+                    className={Style.Form}
                     onSubmit={event => this.onSubmit(event)}
                     method="Post">
                     <div className={Style.TodoWrapper}>
@@ -94,9 +95,10 @@ export default class Form extends Component {
                         value={newTodo}
                         onChange={event => this.onChange(event, 'newTodo')}
                     />
-                    <Button 
-                        onClick={event => this.addTodo(event)} 
-                        type="submit" disabled={loading}>
+                    <Button
+                        onClick={event => this.addTodo(event)}
+                        type="submit"
+                        disabled={loading}>
                         Press to add
                     </Button>
                 </form>

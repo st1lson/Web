@@ -17,6 +17,7 @@
     "parser": "@babel/eslint-parser",
     "rules": {
         "sonarjs/cognitive-complexity": ["error", 15],
+        "sonarjs/prefer-immediate-return": 0,
         "indent": ["error", 4],
         "no-extra-parens": ["error", "all", { "ignoreJSX": "multi-line" }],
         "react/prop-types": 0,
