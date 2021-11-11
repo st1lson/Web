@@ -5,6 +5,7 @@ import Button from '../Button/Button';
 import Style from './Form.scss';
 import startFetchMyQuery from './GraphQL/GraphQl';
 import Popup from '../Popup/Popup';
+import { NoEmitOnErrorsPlugin } from 'webpack';
 
 export default class Form extends Component {
     constructor(props) {
@@ -87,9 +88,9 @@ export default class Form extends Component {
 
         request = 'read';
 
-        startFetchMyQuery(request, {}).then(data =>
-            this.updateTodosData(data.todo),
-        );
+        startFetchMyQuery(request, {})
+            .then(data => this.updateTodosData(data.todo))
+            .catch(errors => console.log(errors));
     }
 
     updateTodosData(items) {

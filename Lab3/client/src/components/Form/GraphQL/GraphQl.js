@@ -4,6 +4,8 @@ export default async function startFetchMyQuery(request, variables) {
     if (errors) {
         // handle those errors like a pro
         console.error(errors);
+
+        return errors;
     }
 
     return data;
