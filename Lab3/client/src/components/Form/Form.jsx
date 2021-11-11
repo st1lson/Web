@@ -10,7 +10,7 @@ export default class Form extends Component {
         super(props);
         this.state = {
             newTodo: '',
-            todos: ['Todo123', 'visit gym', 'oleg', 'have a rest'],
+            todos: [],
             toDelete: '',
             request: 'read',
             loading: false,
@@ -65,6 +65,30 @@ export default class Form extends Component {
     onSubmit = event => {
         event.preventDefault();
     };
+
+    componentDidMount() {
+        let { request } = this.state;
+
+        request = 'read';
+
+        startFetchMyQuery(request, {}).then(data => this.updateTodosData(data.todo));
+    }
+
+    updateTodosData(items) {
+        let { todos } = this.state;
+
+        const newTodos = [];
+        for (let i = 0; i < items.length; i++) {
+            newTodos.push(items[i]['Task']);
+        }
+
+        if (todos !== newTodos) {
+            todos = newTodos;
+            this.setState({
+                todos,
+            });
+        }
+    }
 
     render() {
         const { newTodo, todos, loading } = this.state;

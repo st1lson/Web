@@ -6,9 +6,7 @@ export default async function startFetchMyQuery(request, variables) {
         console.error(errors);
     }
 
-    // do something great with this precious data
-
-    console.log(data);
+    return data;
 }
 
 const operationsDoc = `
