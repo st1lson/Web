@@ -109,9 +109,8 @@ export default class Form extends Component {
     }
 
     popupClick = () => {
-        let { inEdit, request, elementInEdit, editedElement } = this.state;
-
-        console.log(editedElement);
+        let { todos, inEdit, request, elementInEdit, editedElement } =
+            this.state;
 
         if (!editedElement) {
             this.setState({
@@ -125,12 +124,16 @@ export default class Form extends Component {
 
         request = 'update';
 
+        const index = todos.indexOf(elementInEdit);
+        todos[index] = editedElement;
+
         startFetchMyQuery(request, {
             oldTask: elementInEdit,
             newTask: editedElement,
         });
 
         this.setState({
+            todos,
             inEdit: !inEdit,
             elementInEdit: '',
             editedElement: '',
