@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Todo from '../Todo/Todo';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
+import fetchMyQuery from './GraphQL/GraphQl';
 import Style from './Form.scss';
 
 export default class Form extends Component {
@@ -11,6 +12,7 @@ export default class Form extends Component {
             newTodo: '',
             todos: ['Todo123', 'visit gym', 'oleg', 'have a rest'],
             toDelete: '',
+            request: 'read',
             loading: false,
         };
     }
@@ -26,93 +28,43 @@ export default class Form extends Component {
 
     todoClickHanlder = (event, element) => {
         const { todos } = this.state;
+        let { request } = this.state;
 
         let index = todos.indexOf(element);
         const item = todos[index];
         
         todos.splice(index, 1);
+        request = 'delete';
         this.setState({
             todos,
-            toDelete: item
+            toDelete: item,
+            request,
         });
 
-        console.log(item);
+        fetchMyQuery(request);
     };
 
-    addTodo = event => {
+    addTodo = (event)=> {
         const { todos, newTodo } = this.state;
+        let { request } = this.state;
 
         if (todos.includes(newTodo)) {
             return;
         }
 
         todos.push(newTodo);
+        request = 'add';
         this.setState({
-            todos
+            todos,
+            request,
         });
+
+        fetchMyQuery(request);
     };
 
     onSubmit = event => {
         event.preventDefault();
 
-        async function fetchGraphQL(operationsDoc, operationName, variables) {
-            const result = await fetch(
-                'https://arriving-chamois-37.hasura.app/v1/graphql',
-                {
-                    headers: {
-                        'content-type': 'application/json',
-                        'x-hasura-admin-secret':
-                            'R1jLcaDv4iRAEpTV3FWXiYMizryCJGKHBt4LnAUrNRDJDBQ7wRCemsnVFy9AOgs8',
-                    },
-                    method: 'POST',
-                    body: JSON.stringify({
-                        query: operationsDoc,
-                        variables: variables,
-                        operationName: operationName,
-                    }),
-                },
-            );
-    
-            return await result.json();
-        }
-    
-        const operationsDoc = `
-           query MyQuery {
-                todo {
-                    Task
-                }
-            }
-
-            mutation deleteTask {
-                delete_todo(where: {Task: {_eq: "${this.state.toDelete}"}}) {
-                  affected_rows
-                }
-              }
-
-            mutation updateTask {
-                update_todo(where: {Task: {_eq: "ttttt"}}, _set: {Task: "ttt"}) {
-                  affected_rows
-                }
-            }
-        `;
-    
-        function fetchMyQuery() {
-            return fetchGraphQL(operationsDoc, 'MyQuery', {});
-        }
-    
-        async function startFetchMyQuery() {
-            const { errors, data } = await fetchMyQuery();
-    
-            if (errors) {
-                // handle those errors like a pro
-                console.error(errors);
-            }
-
-            // do something great with this precious data
-            console.log(data);
-        }
-    
-        startFetchMyQuery();
     };
 
     render() {
@@ -122,7 +74,7 @@ export default class Form extends Component {
             <div className={Style.Wrapper}>
                 <h1 className={Style.Title}>Todos</h1>
                 <form className={Style.Form}
-                    onSubmit={this.onSubmit}
+                    onSubmit={event => this.onSubmit(event)}
                     method="Post">
                     <div className={Style.TodoWrapper}>
                         {todos.map(element => (
