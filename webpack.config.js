@@ -1,4 +1,6 @@
+/* eslint-disable camelcase */
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const NodePoyfillWebpackPlugin = require('node-polyfill-webpack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -8,6 +10,7 @@ module.exports = {
         path: path.resolve(__dirname, './Lab3/client/dist'),
     },
     plugins: [
+        new NodePoyfillWebpackPlugin(),
         new HtmlWebpackPlugin({
             template: './Lab3/client/src/index.html',
         }),
@@ -15,6 +18,14 @@ module.exports = {
     resolve: {
         modules: [__dirname, 'src', 'node_modules'],
         extensions: ['*', '.js', '.jsx', '.tsx', '.ts'],
+        fallback: {
+            fs: false,
+            esbuild: false,
+            '@swc/core': false,
+            'uglify-js': false,
+            worker_threads: false,
+            child_process: false,
+        },
     },
     module: {
         rules: [
