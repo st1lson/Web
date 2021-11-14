@@ -16,6 +16,7 @@ export default class MailForm extends Component {
             loading: false,
             requestText: '',
             requestEnded: false,
+            errors: [],
         };
     }
 
@@ -67,17 +68,38 @@ export default class MailForm extends Component {
                 });
             })
             .catch(error => {
+                const array = [];
+                const { errors } = this.state;
+                if (error.response.data.errors) {
+                    for (
+                        const errorKey = 0;
+                        i < error.responce.data.errors.length;
+                        i++
+                    ) {
+                        errors.push(error.responce.data.errors[errorKey]);
+                    }
+                }
+
+                console.log(errors);
+
                 this.setState({
                     loading: false,
                     requestEnded: true,
-                    requestText: error.response.data,
+                    errors,
                 });
             });
     };
 
     render() {
-        const { email, author, text, loading, requestEnded, requestText } =
-            this.state;
+        const {
+            email,
+            author,
+            text,
+            loading,
+            requestEnded,
+            requestText,
+            errors,
+        } = this.state;
 
         return (
             <div className={Style.Wrapper}>
@@ -113,7 +135,8 @@ export default class MailForm extends Component {
                     <Button name="submit" type="submit" disabled={loading}>
                         Submit
                     </Button>
-                    {requestEnded ? <p>{requestText}</p> : ''}
+                    {requestText ? <p>{requestText}</p> : ''}
+                    {errors ? errors.map(error => <p>{error}</p>) : ''}
                     {loading ? <Spinner /> : ''}
                 </form>
             </div>
