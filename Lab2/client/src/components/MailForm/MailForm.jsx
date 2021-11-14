@@ -71,7 +71,7 @@ export default class MailForm extends Component {
                 const array = error.response.data.errors;
                 const { errors } = this.state;
                 if (array) {
-                    for (const key = 0; i < array.length; i++) {
+                    for (const key = 0; key < array.length; key++) {
                         errors.push(array[key]);
                     }
                 }
