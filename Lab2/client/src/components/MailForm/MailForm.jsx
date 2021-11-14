@@ -68,19 +68,13 @@ export default class MailForm extends Component {
                 });
             })
             .catch(error => {
-                const array = [];
+                const array = error.response.data.errors;
                 const { errors } = this.state;
-                if (error.response.data.errors) {
-                    for (
-                        const errorKey = 0;
-                        i < error.responce.data.errors.length;
-                        i++
-                    ) {
-                        errors.push(error.responce.data.errors[errorKey]);
+                if (array) {
+                    for (const key = 0; i < array.length; i++) {
+                        errors.push(array[key]);
                     }
                 }
-
-                console.log(errors);
 
                 this.setState({
                     loading: false,
