@@ -17,6 +17,7 @@ instance.interceptors.response.use(null, error => {
         const errors = {
             NetworkError: ['Error: Network error'],
         };
+
         error.response = {
             data: { errors },
         };

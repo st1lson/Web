@@ -68,17 +68,19 @@ export default class MailForm extends Component {
                 });
             })
             .catch(error => {
-                const array = error.response.data.errors;
-                const { errors } = this.state;
-                if (array) {
-                    for (const key = 0; key < array.length; key++) {
-                        errors.push(array[key]);
+                const errorsJson = error.response.data.errors;
+                let errors = [];
+
+                if (errorsJson) {
+                    for (const key in errorsJson) {
+                        errors.push(errorsJson[key]);
                     }
                 }
 
                 this.setState({
                     loading: false,
                     requestEnded: true,
+                    requestText: '',
                     errors,
                 });
             });
@@ -130,7 +132,9 @@ export default class MailForm extends Component {
                         Submit
                     </Button>
                     {requestText ? <p>{requestText}</p> : ''}
-                    {errors ? errors.map(error => <p>{error}</p>) : ''}
+                    {errors
+                        ? errors.map(error => <p key={error}>{error}</p>)
+                        : ''}
                     {loading ? <Spinner /> : ''}
                 </form>
             </div>
