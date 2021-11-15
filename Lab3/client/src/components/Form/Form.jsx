@@ -153,11 +153,26 @@ export default class Form extends Component {
 
         return (
             <div className={Style.Wrapper}>
-                <h1 className={Style.Title}>Todos</h1>
                 <form
                     className={Style.Form}
                     onSubmit={event => this.onSubmit(event)}
                     method="Post">
+                    <div className={Style.InputWrapper}>
+                        <Input
+                            labelText="Your todo:"
+                            placeholder="Todo"
+                            name="newTodo"
+                            type="text"
+                            value={newTodo}
+                            onChange={event => this.onChange(event, 'newTodo')}
+                        />
+                        <Button
+                            onClick={event => this.addTodo(event)}
+                            type="submit"
+                            disabled={loading}>
+                            Add
+                        </Button>
+                    </div>
                     <div className={Style.TodoWrapper}>
                         {todos.map(element => (
                             <Todo
@@ -172,20 +187,6 @@ export default class Form extends Component {
                             </Todo>
                         ))}
                     </div>
-                    <Input
-                        labelText="Your todo:"
-                        placeholder="Todo"
-                        name="newTodo"
-                        type="text"
-                        value={newTodo}
-                        onChange={event => this.onChange(event, 'newTodo')}
-                    />
-                    <Button
-                        onClick={event => this.addTodo(event)}
-                        type="submit"
-                        disabled={loading}>
-                        Press to add
-                    </Button>
                 </form>
                 {inEdit ? (
                     <Popup
