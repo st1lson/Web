@@ -34,7 +34,7 @@ export default class Form extends Component {
         const { todos } = this.state;
         let { request } = this.state;
 
-        let index = todos.indexOf(element);
+        const index = todos.map(e => e.Task).indexOf(element);
         const item = todos[index];
 
         todos.splice(index, 1);
@@ -45,7 +45,7 @@ export default class Form extends Component {
             request,
         });
 
-        startFetchMyQuery(request, { Task: item });
+        startFetchMyQuery(request, { Task: item['Task'] });
     };
 
     addTodo = event => {
@@ -136,8 +136,8 @@ export default class Form extends Component {
 
         request = 'update';
 
-        const index = todos.indexOf(elementInEdit);
-        todos[index] = editedElement;
+        const index = todos.map(e => e.Task).indexOf(elementInEdit);
+        todos[index]['Task'] = editedElement;
 
         startFetchMyQuery(request, {
             oldTask: elementInEdit,
