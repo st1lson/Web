@@ -5,7 +5,6 @@ import Button from '../Button/Button';
 import Style from './Form.scss';
 import startFetchMyQuery from './GraphQL/GraphQl';
 import Popup from '../Popup/Popup';
-import { NoEmitOnErrorsPlugin } from 'webpack';
 
 export default class Form extends Component {
     constructor(props) {
@@ -57,7 +56,7 @@ export default class Form extends Component {
             return;
         }
 
-        todos.push(newTodo);
+        todos.push({ Task: newTodo, Checked: false });
         request = 'add';
         this.setState({
             todos,
@@ -76,6 +75,18 @@ export default class Form extends Component {
         this.setState({
             inEdit,
             elementInEdit,
+        });
+    };
+
+    checkTodo = (event, element) => {
+        const { todos } = this.state;
+
+        const index = todos.indexOf(element['Task']);
+        element['Checked'] = !element['Checked'];
+        todos[index] = element;
+
+        this.setState({
+            todos,
         });
     };
 
@@ -98,7 +109,7 @@ export default class Form extends Component {
 
         const newTodos = [];
         for (let i = 0; i < items.length; i++) {
-            newTodos.push(items[i]['Task']);
+            newTodos.push(items[i]);
         }
 
         if (todos !== newTodos) {
@@ -176,14 +187,21 @@ export default class Form extends Component {
                     <div className={Style.TodoWrapper}>
                         {todos.map(element => (
                             <Todo
-                                key={element}
+                                key={element['Task']}
+                                checked={element['Checked']}
                                 onClickEdit={event =>
-                                    this.editTodo(event, element)
+                                    this.editTodo(event, element['Task'])
                                 }
                                 onClickDelete={event =>
-                                    this.todoClickHanlder(event, element)
+                                    this.todoClickHanlder(
+                                        event,
+                                        element['Task'],
+                                    )
+                                }
+                                onClickCheck={event =>
+                                    this.checkTodo(event, element)
                                 }>
-                                {element}
+                                {element['Task']}
                             </Todo>
                         ))}
                     </div>

@@ -15,6 +15,7 @@ const operationsDoc = `
    query read {
         todo {
             Task
+            Checked
         }
     }
 
