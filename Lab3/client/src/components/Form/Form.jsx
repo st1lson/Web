@@ -80,13 +80,20 @@ export default class Form extends Component {
 
     checkTodo = (event, element) => {
         const { todos } = this.state;
+        let { request } = this.state;
 
         const index = todos.indexOf(element['Task']);
         element['Checked'] = !element['Checked'];
         todos[index] = element;
 
+        request = 'check';
         this.setState({
             todos,
+        });
+
+        startFetchMyQuery(request, {
+            Task: element['Task'],
+            Checked: element['Checked'],
         });
     };
 

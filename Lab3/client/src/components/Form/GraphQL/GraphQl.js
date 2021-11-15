@@ -37,6 +37,14 @@ const operationsDoc = `
             Task
           }
     }
+
+    mutation check($Task: String!, 
+        $Checked: Boolean!) {
+        update_todo_by_pk(pk_columns: {Task: $Task},
+             _set: {Checked: $Checked}) {
+            Checked
+          }
+    }
 `;
 
 async function fetchMyQuery(request, variables) {
