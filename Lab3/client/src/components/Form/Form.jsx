@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Todo from '../Todo/Todo';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
@@ -6,7 +6,7 @@ import Style from './Form.scss';
 import startFetchMyQuery from './GraphQL/GraphQl';
 import Popup from '../Popup/Popup';
 
-export default class Form extends Component {
+export default class Form extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -20,6 +20,13 @@ export default class Form extends Component {
             editedElement: '',
         };
     }
+
+    componentDidUpdate = () => {
+        if (this.props.data) {
+            const todos = this.props.data.todo;
+            this.setState({ todos });
+        }
+    };
 
     onChange = (event, name) => {
         const { [name]: value } = this.state;
@@ -40,7 +47,7 @@ export default class Form extends Component {
         todos.splice(index, 1);
         request = 'delete';
         this.setState({
-            todos,
+            todos: [...todos],
             toDelete: item,
             request,
         });
@@ -59,7 +66,7 @@ export default class Form extends Component {
         todos.push({ Task: newTodo, Checked: false });
         request = 'add';
         this.setState({
-            todos,
+            todos: [...todos],
             request,
         });
 
@@ -88,7 +95,7 @@ export default class Form extends Component {
 
         request = 'check';
         this.setState({
-            todos,
+            todos: [...todos],
         });
 
         startFetchMyQuery(request, {
@@ -122,7 +129,7 @@ export default class Form extends Component {
         if (todos !== newTodos) {
             todos = newTodos;
             this.setState({
-                todos,
+                todos: [...todos],
             });
         }
     }

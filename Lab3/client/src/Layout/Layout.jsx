@@ -1,14 +1,15 @@
 import React from 'react';
+import Form from '../components/Form/Form';
 
 const Layout = props => {
-    const { children } = props;
+    const { data } = props;
 
     return (
         <div>
             <header>
                 <h1>To Do</h1>
             </header>
-            <main>{children}</main>
+            <Form data={data} />
         </div>
     );
 };

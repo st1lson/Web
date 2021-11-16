@@ -2,7 +2,6 @@ export default async function startFetchMyQuery(request, variables) {
     const { errors, data } = await fetchMyQuery(request, variables);
 
     if (errors) {
-        // handle those errors like a pro
         console.error(errors);
 
         return errors;
@@ -69,7 +68,7 @@ async function fetchGraphQL(operationsDoc, operationName, variables) {
     return res;
 }
 
-function setHeaders() {
+export function setHeaders() {
     return {
         'content-type': 'application/json',
         'x-hasura-admin-secret':

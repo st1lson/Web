@@ -1,11 +1,12 @@
 import React from 'react';
-import Form from './components/Form/Form';
-import Layout from './Layout/Layout';
+import LastChanges from './components/Form/GraphQL/SubscriptionHandler';
+import { ApolloProvider } from '@apollo/client';
+import { apolloClient } from './components/Form/GraphQL/SubscriptionHandler';
 
 const App = () => (
-    <Layout>
-        <Form />
-    </Layout>
+    <ApolloProvider client={apolloClient}>
+        <LastChanges />
+    </ApolloProvider>
 );
 
 export default App;
