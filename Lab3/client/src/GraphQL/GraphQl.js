@@ -1,9 +1,10 @@
+import { HASURA_ADMIN_SECRET, URI } from './config';
+
 export default async function startFetchQuery(request, variables) {
     const { errors, data } = await fetchQuery(request, variables);
 
     if (errors) {
         console.error(errors);
-
         return errors;
     }
 
@@ -51,18 +52,15 @@ async function fetchQuery(request, variables) {
 }
 
 async function fetchGraphQL(operationsDoc, operationName, variables) {
-    const result = await fetch(
-        'https://arriving-chamois-37.hasura.app/v1/graphql',
-        {
-            headers: setHeaders(),
-            method: 'POST',
-            body: JSON.stringify({
-                query: operationsDoc,
-                variables,
-                operationName,
-            }),
-        },
-    );
+    const result = await fetch(URI, {
+        headers: setHeaders(),
+        method: 'POST',
+        body: JSON.stringify({
+            query: operationsDoc,
+            variables,
+            operationName,
+        }),
+    });
 
     const res = await result.json();
     return res;
@@ -71,7 +69,6 @@ async function fetchGraphQL(operationsDoc, operationName, variables) {
 export function setHeaders() {
     return {
         'content-type': 'application/json',
-        'x-hasura-admin-secret':
-            'R1jLcaDv4iRAEpTV3FWXiYMizryCJGKHBt4LnAUrNRDJDBQ7wRCemsnVFy9AOgs8',
+        'x-hasura-admin-secret': HASURA_ADMIN_SECRET,
     };
 }

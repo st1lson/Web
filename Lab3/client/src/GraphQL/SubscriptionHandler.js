@@ -11,13 +11,14 @@ import { WebSocketLink } from '@apollo/client/link/ws';
 import gql from 'graphql-tag';
 import Layout from '../Layout/Layout';
 import { setHeaders } from './GraphQl';
+import { URI, URI_WSS } from './config';
 
 const httpLink = new HttpLink({
-    uri: 'https://arriving-chamois-37.hasura.app/v1/graphql',
+    uri: URI,
 });
 
 const wsLink = new WebSocketLink({
-    uri: 'wss://arriving-chamois-37.hasura.app/v1/graphql',
+    uri: URI_WSS,
     options: {
         reconnect: true,
         connectionParams: {
@@ -51,6 +52,5 @@ const tasksSubscriptions = gql`
 
 export default function SubscriptionResult() {
     const { data } = useSubscription(tasksSubscriptions);
-
     return <Layout data={data} />;
 }
