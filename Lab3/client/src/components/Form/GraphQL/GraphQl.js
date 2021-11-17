@@ -1,5 +1,5 @@
-export default async function startFetchMyQuery(request, variables) {
-    const { errors, data } = await fetchMyQuery(request, variables);
+export default async function startFetchQuery(request, variables) {
+    const { errors, data } = await fetchQuery(request, variables);
 
     if (errors) {
         console.error(errors);
@@ -46,7 +46,7 @@ const operationsDoc = `
     }
 `;
 
-async function fetchMyQuery(request, variables) {
+async function fetchQuery(request, variables) {
     return fetchGraphQL(operationsDoc, request, variables);
 }
 

@@ -51,6 +51,6 @@ const tasksSubscriptions = gql`
 
 export default function SubscriptionResult() {
     const { data, loading } = useSubscription(tasksSubscriptions);
-    console.log(data);
+
     return <Layout data={data} />;
 }

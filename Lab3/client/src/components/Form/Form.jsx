@@ -3,7 +3,7 @@ import Todo from '../Todo/Todo';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
 import Style from './Form.scss';
-import startFetchMyQuery from './GraphQL/GraphQl';
+import startFetchQuery from './GraphQL/GraphQl';
 import Popup from '../Popup/Popup';
 
 export default class Form extends PureComponent {
@@ -13,7 +13,7 @@ export default class Form extends PureComponent {
             newTodo: '',
             todos: [],
             toDelete: '',
-            request: 'read',
+            request: '',
             loading: false,
             inEdit: false,
             elementInEdit: '',
@@ -37,7 +37,7 @@ export default class Form extends PureComponent {
         }
     };
 
-    todoClickHanlder = (event, element) => {
+    onTodoDelete = (event, element) => {
         const { todos } = this.state;
         let { request } = this.state;
 
@@ -52,10 +52,10 @@ export default class Form extends PureComponent {
             request,
         });
 
-        startFetchMyQuery(request, { Task: item['Task'] });
+        startFetchQuery(request, { Task: item['Task'] });
     };
 
-    addTodo = event => {
+    onTodoAdd = event => {
         const { todos, newTodo } = this.state;
         let { request } = this.state;
 
@@ -63,17 +63,16 @@ export default class Form extends PureComponent {
             return;
         }
 
-        todos.push({ Task: newTodo, Checked: false });
         request = 'add';
         this.setState({
             todos: [...todos],
             request,
         });
 
-        startFetchMyQuery(request, { Task: { Task: newTodo } });
+        startFetchQuery(request, { Task: { Task: newTodo } });
     };
 
-    editTodo = (event, element) => {
+    onTodoEdit = (event, element) => {
         let { inEdit, elementInEdit } = this.state;
 
         inEdit = true;
@@ -85,7 +84,7 @@ export default class Form extends PureComponent {
         });
     };
 
-    checkTodo = (event, element) => {
+    onTodoCheck = (event, element) => {
         const { todos } = this.state;
         let { request } = this.state;
 
@@ -98,7 +97,7 @@ export default class Form extends PureComponent {
             todos: [...todos],
         });
 
-        startFetchMyQuery(request, {
+        startFetchQuery(request, {
             Task: element['Task'],
             Checked: element['Checked'],
         });
@@ -127,7 +126,7 @@ export default class Form extends PureComponent {
         const index = todos.map(e => e.Task).indexOf(elementInEdit);
         todos[index]['Task'] = editedElement;
 
-        startFetchMyQuery(request, {
+        startFetchQuery(request, {
             oldTask: elementInEdit,
             newTask: editedElement,
         });
@@ -166,7 +165,7 @@ export default class Form extends PureComponent {
                             onChange={event => this.onChange(event, 'newTodo')}
                         />
                         <Button
-                            onClick={event => this.addTodo(event)}
+                            onClick={event => this.onTodoAdd(event)}
                             type="submit"
                             disabled={loading}>
                             Add
@@ -178,16 +177,13 @@ export default class Form extends PureComponent {
                                 key={element['Task']}
                                 checked={element['Checked']}
                                 onClickEdit={event =>
-                                    this.editTodo(event, element['Task'])
+                                    this.onTodoEdit(event, element['Task'])
                                 }
                                 onClickDelete={event =>
-                                    this.todoClickHanlder(
-                                        event,
-                                        element['Task'],
-                                    )
+                                    this.onTodoDelete(event, element['Task'])
                                 }
                                 onClickCheck={event =>
-                                    this.checkTodo(event, element)
+                                    this.onTodoCheck(event, element)
                                 }>
                                 {element['Task']}
                             </Todo>
