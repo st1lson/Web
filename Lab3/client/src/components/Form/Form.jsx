@@ -108,32 +108,6 @@ export default class Form extends PureComponent {
         event.preventDefault();
     };
 
-    componentDidMount() {
-        let { request } = this.state;
-
-        request = 'read';
-
-        startFetchMyQuery(request, {})
-            .then(data => this.updateTodosData(data.todo))
-            .catch(errors => console.log(errors));
-    }
-
-    updateTodosData(items) {
-        let { todos } = this.state;
-
-        const newTodos = [];
-        for (let i = 0; i < items.length; i++) {
-            newTodos.push(items[i]);
-        }
-
-        if (todos !== newTodos) {
-            todos = newTodos;
-            this.setState({
-                todos: [...todos],
-            });
-        }
-    }
-
     popupClick = () => {
         let { todos, inEdit, request, elementInEdit, editedElement } =
             this.state;
