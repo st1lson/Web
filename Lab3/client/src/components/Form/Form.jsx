@@ -3,7 +3,7 @@ import Todo from '../Todo/Todo';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
 import Style from './Form.scss';
-import startFetchQuery from './GraphQL/GraphQl';
+import startFetchQuery from '../../GraphQL/GraphQl';
 import Popup from '../Popup/Popup';
 
 export default class Form extends PureComponent {

@@ -9,7 +9,7 @@ import { getMainDefinition } from '@apollo/client/utilities';
 import { HttpLink } from 'apollo-link-http';
 import { WebSocketLink } from '@apollo/client/link/ws';
 import gql from 'graphql-tag';
-import Layout from '../../../Layout/Layout';
+import Layout from '../Layout/Layout';
 import { setHeaders } from './GraphQl';
 
 const httpLink = new HttpLink({
@@ -50,7 +50,7 @@ const tasksSubscriptions = gql`
 `;
 
 export default function SubscriptionResult() {
-    const { data, loading } = useSubscription(tasksSubscriptions);
+    const { data } = useSubscription(tasksSubscriptions);
 
     return <Layout data={data} />;
 }
