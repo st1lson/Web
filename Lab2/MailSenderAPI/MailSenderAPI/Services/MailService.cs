@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Configuration;
-using System;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
@@ -10,15 +9,11 @@ namespace MailSenderAPI.Services
     {
         private readonly string _login;
         private readonly string _password;
-        private readonly string _host;
-        private readonly int _port;
 
         public MailService(IConfiguration configuration)
         {
             _login = configuration["Login"];
             _password = configuration["Password"];
-            _host = configuration["Host"];
-            _port = Int32.Parse(configuration["Port"]);
         }
 
         public async Task<bool> TrySendMailAsync(MailAddress mailAddress, string author, string text)
@@ -33,7 +28,7 @@ namespace MailSenderAPI.Services
                     IsBodyHtml = true
                 };
 
-                SmtpClient client = new(_host, _port)
+                SmtpClient client = new("smtp.gmail.com", 587)
                 {
                     Credentials = new NetworkCredential(_login, _password),
                     DeliveryMethod = SmtpDeliveryMethod.Network,
