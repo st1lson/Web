@@ -1,4 +1,5 @@
-﻿using MailSenderAPI.Models;
+﻿using Ganss.XSS;
+using MailSenderAPI.Models;
 using MailSenderAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -19,7 +20,10 @@ namespace MailSenderAPI.Controllers
         [HttpPost]
         public async Task<ActionResult> PostMail([FromBody] MailData mailData)
         {
-            if (!MailAddress.TryCreate(mailData.Email, out MailAddress emailAddress))
+            HtmlSanitizer sanitizer = new ();
+            string sanitizedText = sanitizer.Sanitize(mailData.Text);
+
+            if (!MailAddress.TryCreate(sanitizedText, out MailAddress emailAddress))
             {
                 ModelState.AddModelError(nameof(mailData.Email), "Email is invalid");
                 return ValidationProblem();
@@ -34,7 +38,7 @@ namespace MailSenderAPI.Controllers
             {
                 mailData.Email,
                 mailData.Author,
-                mailData.Text
+                body = sanitizedText
             });
         }
     }

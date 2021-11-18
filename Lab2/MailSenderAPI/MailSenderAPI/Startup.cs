@@ -4,26 +4,25 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using System.Collections.Generic;
 
 namespace MailSenderAPI
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            Environment = env;
             _allowOrigins = "production";
         }
 
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment Environment { get; }
         private readonly string _allowOrigins;
 
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -48,22 +47,8 @@ namespace MailSenderAPI
             services.Configure<IpRateLimitOptions>(Configuration.GetSection("IpRateLimit"));
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
-            /*
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MailSenderAPI v1"));
-
-                app.UseCors(options =>
-                    options.WithOrigins("http://localhost:8080")
-                    .AllowAnyHeader()
-                    .AllowAnyMethod());
-            }
-            */
-
             app.UseCors(_allowOrigins);   
 
             app.UseHttpsRedirection();
