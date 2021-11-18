@@ -4,6 +4,7 @@ import Style from './MailForm.scss';
 import Input from './Input/Input';
 import TextArea from './TextArea/TextArea';
 import Button from '../Button/Button';
+import Popup from '../Popup/Popup';
 import Spinner from '../Spinner/Spinner';
 
 export default class MailForm extends Component {
@@ -15,7 +16,7 @@ export default class MailForm extends Component {
             text: '',
             loading: false,
             requestText: '',
-            requestEnded: false,
+            isError: false,
             errors: [],
         };
     }
@@ -73,7 +74,7 @@ export default class MailForm extends Component {
 
                 if (errorsJson) {
                     for (const key in errorsJson) {
-                        errors.push(errorsJson[key]);
+                        errors.push(<p key={key}>{errorsJson[key]}</p>);
                     }
                 }
 
@@ -81,21 +82,21 @@ export default class MailForm extends Component {
                     loading: false,
                     requestEnded: true,
                     requestText: '',
+                    isError: true,
                     errors,
                 });
             });
     };
 
+    onPopupDismiss = () => {
+        this.setState({
+            isError: false,
+        });
+    };
+
     render() {
-        const {
-            email,
-            author,
-            text,
-            loading,
-            requestEnded,
-            requestText,
-            errors,
-        } = this.state;
+        const { email, author, text, loading, isError, requestText, errors } =
+            this.state;
 
         return (
             <div className={Style.Wrapper}>
@@ -132,11 +133,13 @@ export default class MailForm extends Component {
                         Submit
                     </Button>
                     {requestText ? <p>{requestText}</p> : ''}
-                    {errors
-                        ? errors.map(error => <p key={error}>{error}</p>)
-                        : ''}
                     {loading ? <Spinner /> : ''}
                 </form>
+                {isError ? (
+                    <Popup onClick={this.onPopupDismiss}>{errors}</Popup>
+                ) : (
+                    ''
+                )}
             </div>
         );
     }
