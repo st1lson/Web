@@ -1,12 +1,9 @@
 using AspNetCoreRateLimit;
 using MailSenderAPI.Services;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using System.Collections.Generic;
 
 namespace MailSenderAPI
 {
@@ -48,7 +45,7 @@ namespace MailSenderAPI
             services.Configure<IpRateLimitOptions>(Configuration.GetSection("IpRateLimit"));
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
             app.UseCors(_allowOrigins);
 
