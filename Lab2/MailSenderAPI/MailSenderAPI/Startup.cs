@@ -50,19 +50,7 @@ namespace MailSenderAPI
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MailSenderAPI v1"));
-
-                app.UseCors(options =>
-                    options.WithOrigins("http://localhost:8080")
-                    .AllowAnyHeader()
-                    .AllowAnyMethod());
-            }
-
-            //app.UseCors(_allowOrigins);
+            app.UseCors(_allowOrigins);
 
             app.UseHttpsRedirection();
 
