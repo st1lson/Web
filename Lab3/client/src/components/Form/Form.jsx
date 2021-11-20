@@ -4,7 +4,8 @@ import Input from '../Input/Input';
 import Button from '../Button/Button';
 import Style from './Form.scss';
 import startFetchQuery from '../../GraphQL/GraphQl';
-import Popup from '../Popup/Popup';
+import EditPopup from '../Popup/EditPopup';
+import ErrorPopup from '../Popup/ErrorPopup';
 import Spinner from '../Spinner/Spinner';
 
 export default class Form extends PureComponent {
@@ -13,9 +14,10 @@ export default class Form extends PureComponent {
         this.state = {
             newTodo: '',
             todos: [],
+            error: '',
             toDelete: '',
-            request: '',
-            loading: true,
+            isLoading: true,
+            isError: false,
             inEdit: false,
             elementInEdit: '',
             editedElement: '',
@@ -27,7 +29,7 @@ export default class Form extends PureComponent {
             const todos = this.props.data.todo;
             this.setState({
                 todos,
-                loading: false,
+                isLoading: false,
             });
         }
     };
@@ -43,37 +45,45 @@ export default class Form extends PureComponent {
 
     onTodoDelete = (event, element) => {
         const { todos } = this.state;
-        let { request } = this.state;
 
         const index = todos.map(e => e.Task).indexOf(element);
         const item = todos[index];
 
         todos.splice(index, 1);
-        request = 'delete';
         this.setState({
             todos: [...todos],
             toDelete: item,
-            request,
         });
 
-        startFetchQuery(request, { Task: item['Task'] });
+        startFetchQuery('delete', { Task: item['Task'] }).then(result => {
+            if (result[0]?.message) {
+                this.setState({
+                    error: <p error="true">{result[0].message}</p>,
+                    isError: true,
+                });
+            }
+        });
     };
 
     onTodoAdd = event => {
         const { todos, newTodo } = this.state;
-        let { request } = this.state;
 
         if (todos.includes(newTodo) || !newTodo) {
             return;
         }
 
-        request = 'add';
         this.setState({
             todos: [...todos],
-            request,
         });
 
-        startFetchQuery(request, { Task: { Task: newTodo } });
+        startFetchQuery('add', { Task: { Task: newTodo } }).then(result => {
+            if (result[0]?.message) {
+                this.setState({
+                    error: <p error="true">{result[0].message}</p>,
+                    isError: true,
+                });
+            }
+        });
     };
 
     onTodoEdit = (event, element) => {
@@ -90,20 +100,25 @@ export default class Form extends PureComponent {
 
     onTodoCheck = (event, element) => {
         const { todos } = this.state;
-        let { request } = this.state;
 
         const index = todos.indexOf(element['Task']);
         element['Checked'] = !element['Checked'];
         todos[index] = element;
 
-        request = 'check';
         this.setState({
             todos: [...todos],
         });
 
-        startFetchQuery(request, {
+        startFetchQuery('check', {
             Task: element['Task'],
             Checked: element['Checked'],
+        }).then(result => {
+            if (result[0]?.message) {
+                this.setState({
+                    error: <p error="true">{result[0].message}</p>,
+                    isError: true,
+                });
+            }
         });
     };
 
@@ -111,9 +126,8 @@ export default class Form extends PureComponent {
         event.preventDefault();
     };
 
-    popupClick = () => {
-        let { todos, inEdit, request, elementInEdit, editedElement } =
-            this.state;
+    onPopupClick = () => {
+        let { todos, inEdit, elementInEdit, editedElement } = this.state;
 
         if (!editedElement) {
             this.setState({
@@ -125,14 +139,16 @@ export default class Form extends PureComponent {
             return;
         }
 
-        request = 'update';
-
-        const index = todos.map(e => e.Task).indexOf(elementInEdit);
-        todos[index]['Task'] = editedElement;
-
-        startFetchQuery(request, {
+        startFetchQuery('update', {
             oldTask: elementInEdit,
             newTask: editedElement,
+        }).then(result => {
+            if (result[0]?.message) {
+                this.setState({
+                    error: <p error="true">{result[0].message}</p>,
+                    isError: true,
+                });
+            }
         });
 
         this.setState({
@@ -143,11 +159,20 @@ export default class Form extends PureComponent {
         });
     };
 
+    onErrorPopup = () => {
+        this.setState({
+            isError: false,
+            errors: [],
+        });
+    };
+
     render() {
         const {
             newTodo,
             todos,
-            loading,
+            error,
+            isLoading,
+            isError,
             inEdit,
             elementInEdit,
             editedElement,
@@ -171,7 +196,7 @@ export default class Form extends PureComponent {
                         <Button
                             onClick={event => this.onTodoAdd(event)}
                             type="submit"
-                            disabled={loading}>
+                            disabled={isLoading}>
                             Add
                         </Button>
                     </div>
@@ -194,9 +219,14 @@ export default class Form extends PureComponent {
                         ))}
                     </div>
                 </form>
-                {loading ? <Spinner /> : ''}
+                {isLoading ? <Spinner /> : ''}
+                {isError ? (
+                    <ErrorPopup onClick={this.onErrorPopup}>{error}</ErrorPopup>
+                ) : (
+                    ''
+                )}
                 {inEdit ? (
-                    <Popup
+                    <EditPopup
                         labelText="New todo text:"
                         placeholder={elementInEdit}
                         name="editedElement"
@@ -205,7 +235,7 @@ export default class Form extends PureComponent {
                         onChange={event =>
                             this.onChange(event, 'editedElement')
                         }
-                        onClick={this.popupClick}></Popup>
+                        onClick={this.onPopupClick}></EditPopup>
                 ) : (
                     ''
                 )}

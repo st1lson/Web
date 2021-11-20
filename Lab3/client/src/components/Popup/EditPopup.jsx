@@ -4,7 +4,7 @@ import Backdrop from './Backdrop/Backdrop';
 import Input from '../Input/Input';
 import Style from './Popup.scss';
 
-const Popup = props => {
+const EditPopup = props => {
     const { onClick, placeholder, labelText, name, type, value, onChange } =
         props;
 
@@ -29,4 +29,4 @@ const Popup = props => {
     );
 };
 
-export default Popup;
+export default EditPopup;

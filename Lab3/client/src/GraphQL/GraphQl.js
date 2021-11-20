@@ -4,7 +4,6 @@ export default async function startFetchQuery(request, variables) {
     const { errors, data } = await fetchQuery(request, variables);
 
     if (errors) {
-        console.error(errors);
         return errors;
     }
 
