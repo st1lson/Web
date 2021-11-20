@@ -5,6 +5,7 @@ import Button from '../Button/Button';
 import Style from './Form.scss';
 import startFetchQuery from '../../GraphQL/GraphQl';
 import Popup from '../Popup/Popup';
+import Spinner from '../Spinner/Spinner';
 
 export default class Form extends PureComponent {
     constructor(props) {
@@ -14,7 +15,7 @@ export default class Form extends PureComponent {
             todos: [],
             toDelete: '',
             request: '',
-            loading: false,
+            loading: true,
             inEdit: false,
             elementInEdit: '',
             editedElement: '',
@@ -24,7 +25,10 @@ export default class Form extends PureComponent {
     componentDidUpdate = () => {
         if (this.props.data) {
             const todos = this.props.data.todo;
-            this.setState({ todos });
+            this.setState({
+                todos,
+                loading: false,
+            });
         }
     };
 
@@ -190,6 +194,7 @@ export default class Form extends PureComponent {
                         ))}
                     </div>
                 </form>
+                {loading ? <Spinner /> : ''}
                 {inEdit ? (
                     <Popup
                         labelText="New todo text:"
