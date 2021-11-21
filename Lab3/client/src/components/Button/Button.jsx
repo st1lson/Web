@@ -1,5 +1,5 @@
 import React from 'react';
-import Style from './Button.scss';
+import Style from '@components/Button/Button.scss';
 
 const Button = props => {
     const { name, onClick, disabled, children } = props;

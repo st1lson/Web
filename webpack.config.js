@@ -26,6 +26,11 @@ module.exports = {
             worker_threads: false,
             child_process: false,
         },
+        alias: {
+            '@components': path.join(__dirname, 'Lab3/client/src/components'),
+            '@GraphQL': path.join(__dirname, 'Lab3/client/src/GraphQL'),
+            '@Layout': path.join(__dirname, 'Lab3/client/src/Layout'),
+        },
     },
     module: {
         rules: [

@@ -1,4 +1,4 @@
-import { HASURA_ADMIN_SECRET, URI } from './config';
+import { HASURA_ADMIN_SECRET, URI } from '@GraphQL/config';
 
 export default async function startFetchQuery(request, variables) {
     const { errors, data } = await fetchQuery(request, variables);

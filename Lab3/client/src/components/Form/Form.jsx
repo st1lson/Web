@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react';
-import Todo from '../Todo/Todo';
-import Input from '../Input/Input';
-import Button from '../Button/Button';
+import Todo from '@components/Todo/Todo';
+import Input from '@components/Input/Input';
+import Button from '@components/Button/Button';
+import startFetchQuery from '@GraphQL/GraphQl';
+import EditPopup from '@components/Popup/EditPopup';
+import ErrorPopup from '@components/Popup/ErrorPopup';
+import Spinner from '@components/Spinner/Spinner';
 import Style from './Form.scss';
-import startFetchQuery from '../../GraphQL/GraphQl';
-import EditPopup from '../Popup/EditPopup';
-import ErrorPopup from '../Popup/ErrorPopup';
-import Spinner from '../Spinner/Spinner';
 
 export default class Form extends PureComponent {
     constructor(props) {

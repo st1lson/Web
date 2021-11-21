@@ -1,7 +1,7 @@
 import React from 'react';
-import Button from '../Button/Button';
+import Button from '@components/Button/Button';
 import Backdrop from './Backdrop/Backdrop';
-import Input from '../Input/Input';
+import Input from '@components/Input/Input';
 import Style from './Popup.scss';
 
 const EditPopup = props => {

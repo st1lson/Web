@@ -9,9 +9,9 @@ import { getMainDefinition } from '@apollo/client/utilities';
 import { HttpLink } from 'apollo-link-http';
 import { WebSocketLink } from '@apollo/client/link/ws';
 import gql from 'graphql-tag';
-import Layout from '../Layout/Layout';
-import { setHeaders } from './GraphQl';
-import { URI, URI_WSS } from './config';
+import Layout from '@Layout/Layout';
+import { setHeaders } from '@GraphQL/GraphQl';
+import { URI, URI_WSS } from '@GraphQL/config';
 
 const httpLink = new HttpLink({
     uri: URI,

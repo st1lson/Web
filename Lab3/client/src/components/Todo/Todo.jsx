@@ -1,6 +1,6 @@
 import React from 'react';
-import Style from './Todo.scss';
 import { MdCheckBoxOutlineBlank, MdCheckBox } from 'react-icons/md';
+import Style from './Todo.scss';
 
 const Todo = props => {
     const { children, checked, onClickEdit, onClickDelete, onClickCheck } =
