@@ -1,5 +1,6 @@
 :root {
     --background-color: #110736;
+    --border-color: #7f3fbf;
     --primary-text-color: #fff;
     --secondary-text-color: #000;
     --hover-text-color: #7a6fa5;
@@ -15,6 +16,7 @@ body {
 
 header {
     align-items: center;
+    border-bottom: 0.15rem solid var(--border-color);
     display: flex;
     font-size: 36px;
     font-weight: 300;
@@ -26,6 +28,7 @@ header {
 
 .Wrapper {
     display: block;
+    margin-top: 1.5rem;
     position: relative;
     user-select: none;
 
@@ -81,7 +84,7 @@ header {
 .Menu {
     background: var(--primary-text-color);
     -webkit-font-smoothing: antialiased;
-    height: 42rem;
+    height: 40.5rem;
     list-style-type: none;
     margin: -2.5rem;
     margin-top: -3rem;
