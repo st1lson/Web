@@ -1,0 +1,105 @@
+:root {
+    --background-color: #110736;
+    --primary-text-color: #fff;
+    --secondary-text-color: #000;
+    --hover-text-color: #7a6fa5;
+}
+
+html,
+body {
+    background-color: var(--background-color);
+    color: var(--primary-text-color);
+    min-height: 100%;
+    width: 100%;
+}
+
+header {
+    align-items: center;
+    display: flex;
+    font-size: 36px;
+    font-weight: 300;
+    height: 10rem;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+}
+
+.Wrapper {
+    display: block;
+    position: relative;
+    user-select: none;
+
+    user-select: none;
+
+    z-index: 1;
+}
+
+.Wrapper a {
+    color: var(--secondary-text-color);
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.Wrapper a:hover {
+    color: var(--hover-text-color);
+    text-decoration: none;
+}
+
+.Wrapper > input {
+    cursor: pointer;
+    display: block;
+    height: 1.2rem;
+    margin-left: 1rem;
+
+    opacity: 0;
+    position: absolute;
+    -webkit-touch-callout: none;
+    width: 2rem;
+    z-index: 2;
+}
+
+.Wrapper span {
+    background: var(--primary-text-color);
+    display: block;
+    height: 0.3rem;
+    margin-left: 1rem;
+    margin-top: 0.3rem;
+    position: relative;
+    transform-origin: 0.3rem 0;
+
+    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
+        background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), opacity 0.55s ease;
+    width: 2rem;
+    z-index: 1;
+}
+
+.Wrapper input:checked ~ span {
+    background: var(--secondary-text-color);
+}
+
+.Menu {
+    background: var(--primary-text-color);
+    -webkit-font-smoothing: antialiased;
+    list-style-type: none;
+    margin: -2.5rem;
+    margin-top: -3rem;
+    padding: 2.5rem;
+    padding-top: 6rem;
+    position: absolute;
+    transform: translate(-100%, 0);
+
+    transform-origin: 0% 0%;
+
+    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+    width: 15rem;
+}
+
+.Menu li {
+    font-size: 22px;
+    padding: 1.5rem;
+}
+
+.Wrapper input:checked ~ ul {
+    transform: none;
+}
