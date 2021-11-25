@@ -74,7 +74,11 @@ export default class MailForm extends Component {
 
                 if (errorsJson) {
                     for (const key in errorsJson) {
-                        errors.push(<p key={key}>{errorsJson[key]}</p>);
+                        errors.push(
+                            <p key={key} error="true">
+                                {errorsJson[key]}
+                            </p>,
+                        );
                     }
                 }
 
@@ -90,6 +94,8 @@ export default class MailForm extends Component {
 
     onPopupDismiss = () => {
         this.setState({
+            requestText: '',
+            errors: [],
             isError: false,
         });
     };
@@ -132,9 +138,15 @@ export default class MailForm extends Component {
                     <Button name="submit" type="submit" disabled={loading}>
                         Submit
                     </Button>
-                    {requestText ? <p>{requestText}</p> : ''}
                     {loading ? <Spinner /> : ''}
                 </form>
+                {requestText ? (
+                    <Popup onClick={this.onPopupDismiss}>
+                        {<p success="true">{requestText}</p>}
+                    </Popup>
+                ) : (
+                    ''
+                )}
                 {isError ? (
                     <Popup onClick={this.onPopupDismiss}>{errors}</Popup>
                 ) : (
