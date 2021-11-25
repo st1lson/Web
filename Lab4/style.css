@@ -10,7 +10,7 @@ html,
 body {
     background-color: var(--background-color);
     color: var(--primary-text-color);
-    min-height: 100%;
+    margin: 0;
     width: 100%;
 }
 
@@ -31,9 +31,6 @@ header {
     margin-top: 1.5rem;
     position: relative;
     user-select: none;
-
-    user-select: none;
-
     z-index: 1;
 }
 
@@ -84,10 +81,11 @@ header {
 .Menu {
     background: var(--primary-text-color);
     -webkit-font-smoothing: antialiased;
-    height: 40.5rem;
     list-style-type: none;
     margin: -2.5rem;
     margin-top: -3rem;
+    min-height: 42rem;
+    min-width: 15rem;
     padding: 2.5rem;
     padding-top: 6rem;
     position: absolute;
@@ -96,7 +94,6 @@ header {
     transform-origin: 0% 0%;
 
     transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
-    width: 15rem;
 }
 
 .Menu li {
