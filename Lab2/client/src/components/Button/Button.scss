@@ -1,0 +1,25 @@
+@use '/Lab2/client/src/global/global.scss' as *;
+
+.Button {
+    color: $font-color;
+    text-align: center;
+    margin: 30px;
+    font-size: 18px;
+    height: 65px;
+    width: 250px;
+    line-height: 65px;
+    border: 3px solid $font-color;
+    border-radius: 10px;
+    background: $button-color;
+    cursor: pointer;
+
+    &:hover {
+        border: 3px solid $button-disabled-shadow-color;
+        background: $button-hover-background;
+    }
+
+    &:disabled {
+        background-color: $button-disabled-color;
+        border: 3px solid $button-disabled-shadow-color;
+    }
+}
