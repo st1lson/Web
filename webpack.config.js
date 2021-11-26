@@ -15,14 +15,6 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './Lab3/client/src/index.html',
         }),
-        new DefinePlugin({
-            'process.env.X_HASURA_ADMIN_SECRET': JSON.stringify(
-                'R1jLcaDv4iRAEpTV3FWXiYMizryCJGKHBt4LnAUrNRDJDBQ7wRCemsnVFy9AOgs8',
-            ),
-            'process.env.GRAPHQL_ENDPOINT': JSON.stringify(
-                'arriving-chamois-37.hasura.app/v1/graphql',
-            ),
-        }),
     ],
     resolve: {
         modules: [__dirname, 'src', 'node_modules'],

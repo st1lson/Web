@@ -3,6 +3,10 @@
 
 name: Build and deploy Node.js app to Azure Web App - graphql-lab
 
+env:
+    X_HASURA_ADMIN_SECRET: ${{ secrets.X_HASURA_ADMIN_SECRET }}
+    GRAPHQL_ENDPOINT: ${{ secrets.GRAPHQL_ENDPOINT }}
+
 on:
     push:
         branches:
