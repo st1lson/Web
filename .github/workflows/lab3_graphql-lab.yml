@@ -3,10 +3,6 @@
 
 name: Build and deploy Node.js app to Azure Web App - graphql-lab
 
-env:
-    X_HASURA_ADMIN_SECRET: ${{ secrets.X_HASURA_ADMIN_SECRET }}
-    GRAPHQL_ENDPOINT: ${{ secrets.GRAPHQL_ENDPOINT }}
-
 on:
     push:
         branches:
@@ -27,9 +23,11 @@ jobs:
                   cache: npm
 
             - name: npm ci and build
-              run: |
-                  npm ci
+              run: npm ci
                   npm run build
+              env:
+                  X_HASURA_ADMIN_SECRET: ${{ secrets.X_HASURA_ADMIN_SECRET }}
+                  GRAPHQL_ENDPOINT: ${{ secrets.GRAPHQL_ENDPOINT }}
 
             - name: Upload artifact for deployment job
               uses: actions/upload-artifact@v2
