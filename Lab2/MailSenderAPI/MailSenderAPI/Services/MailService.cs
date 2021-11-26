@@ -1,8 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
-using System;
+﻿using System;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 
 namespace MailSenderAPI.Services
 {
@@ -18,14 +18,14 @@ namespace MailSenderAPI.Services
             _login = configuration["Login"];
             _password = configuration["Password"];
             _host = configuration["Host"];
-            _port = Int32.Parse(configuration["Port"]);
+            _port = int.Parse(configuration["Port"]);
         }
 
         public async Task<bool> TrySendMailAsync(MailAddress mailAddress, string author, string text)
         {
             try
             {
-                MailMessage mail = new()
+                MailMessage mail = new ()
                 {
                     From = new MailAddress(_login, author),
                     To = { mailAddress },
@@ -33,7 +33,7 @@ namespace MailSenderAPI.Services
                     IsBodyHtml = true
                 };
 
-                SmtpClient client = new(_host, _port)
+                SmtpClient client = new (_host, _port)
                 {
                     Credentials = new NetworkCredential(_login, _password),
                     DeliveryMethod = SmtpDeliveryMethod.Network,
@@ -44,7 +44,6 @@ namespace MailSenderAPI.Services
             }
             catch (System.Exception)
             {
-
                 return false;
             }
 

@@ -1,10 +1,10 @@
-﻿using Ganss.XSS;
+﻿using System.Net;
+using System.Net.Mail;
+using System.Threading.Tasks;
+using Ganss.XSS;
 using MailSenderAPI.Models;
 using MailSenderAPI.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
-using System.Net.Mail;
-using System.Threading.Tasks;
 
 namespace MailSenderAPI.Controllers
 {
@@ -20,7 +20,7 @@ namespace MailSenderAPI.Controllers
         [HttpPost]
         public async Task<ActionResult> PostMail([FromBody] MailData mailData)
         {
-            HtmlSanitizer sanitizer = new();
+            HtmlSanitizer sanitizer = new ();
             string sanitizedHtml = sanitizer.Sanitize(mailData.Text);
 
             if (!MailAddress.TryCreate(mailData.Email, out MailAddress emailAddress))
