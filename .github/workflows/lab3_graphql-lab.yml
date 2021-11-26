@@ -23,7 +23,8 @@ jobs:
                   cache: npm
 
             - name: npm ci and build
-              run: npm ci
+              run: |
+                  npm ci
                   npm run build
               env:
                   X_HASURA_ADMIN_SECRET: ${{ secrets.X_HASURA_ADMIN_SECRET }}
