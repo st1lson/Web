@@ -1,4 +1,4 @@
-using AspNetCoreRateLimit;
+﻿using AspNetCoreRateLimit;
 using MailSenderAPI.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
@@ -20,7 +20,6 @@ namespace MailSenderAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
