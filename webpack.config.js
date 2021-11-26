@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const NodePoyfillWebpackPlugin = require('node-polyfill-webpack-plugin');
 const path = require('path');
 const { DefinePlugin } = require('webpack');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
     entry: './Lab3/client/src/index.js',
