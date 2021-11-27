@@ -26,14 +26,13 @@ header {
     width: 100%;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 900px) {
     .Wrapper {
         background-color: var(--primary-text-color);
         display: flex;
         flex-direction: row;
         justify-content: center;
-        min-height: 5rem;
-        width: 100%;
+        min-width: 100%;
     }
 
     .Wrapper input {
@@ -41,6 +40,12 @@ header {
         opacity: 0;
         pointer-events: none;
         z-index: 2;
+    }
+
+    .Wrapper a {
+        color: var(--secondary-text-color);
+        font-weight: bold;
+        text-decoration: none;
     }
 
     .Menu {
@@ -54,7 +59,7 @@ header {
     }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 900px) {
     .Wrapper {
         background-color: transparent;
         display: block;
