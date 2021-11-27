@@ -26,81 +26,112 @@ header {
     width: 100%;
 }
 
-.Wrapper {
-    display: block;
-    margin-top: 1.5rem;
-    position: relative;
-    user-select: none;
-    z-index: 1;
+@media screen and (min-width: 600px) {
+    .Wrapper {
+        background-color: var(--primary-text-color);
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        min-height: 5rem;
+        width: 100%;
+    }
+
+    .Wrapper input {
+        display: block;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 2;
+    }
+
+    .Menu {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .Menu li {
+        font-size: 2rem;
+        padding: 2rem;
+    }
 }
 
-.Wrapper a {
-    color: var(--secondary-text-color);
-    font-weight: bold;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
+@media screen and (max-width: 600px) {
+    .Wrapper {
+        background-color: transparent;
+        display: block;
+        margin-top: 1.5rem;
+        position: relative;
+        user-select: none;
+        z-index: 1;
+    }
 
-.Wrapper a:hover {
-    color: var(--hover-text-color);
-    text-decoration: none;
-}
+    .Wrapper a {
+        color: var(--secondary-text-color);
+        font-weight: bold;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
 
-.Wrapper > input {
-    cursor: pointer;
-    display: block;
-    height: 1.2rem;
-    margin-left: 1rem;
+    .Wrapper a:hover {
+        color: var(--hover-text-color);
+        text-decoration: none;
+    }
 
-    opacity: 0;
-    position: absolute;
-    -webkit-touch-callout: none;
-    width: 2rem;
-    z-index: 2;
-}
+    .Wrapper input {
+        cursor: pointer;
+        display: block;
+        height: 1.2rem;
+        margin-left: 1rem;
 
-.Wrapper span {
-    background: var(--primary-text-color);
-    display: block;
-    height: 0.3rem;
-    margin-left: 1rem;
-    margin-top: 0.3rem;
-    position: relative;
-    transform-origin: 0.3rem 0;
+        opacity: 0;
+        position: absolute;
+        -webkit-touch-callout: none;
+        width: 2rem;
+        z-index: 2;
+    }
 
-    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
-        background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), opacity 0.55s ease;
-    width: 2rem;
-    z-index: 1;
-}
+    .Wrapper span {
+        background: var(--primary-text-color);
+        display: block;
+        height: 0.3rem;
+        margin-left: 1rem;
+        margin-top: 0.3rem;
+        position: relative;
+        transform-origin: 0.3rem 0;
 
-.Wrapper input:checked ~ span {
-    background: var(--secondary-text-color);
-}
+        transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
+            background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), opacity 0.55s ease;
+        width: 2rem;
+        z-index: 1;
+    }
 
-.Menu {
-    background: var(--primary-text-color);
-    -webkit-font-smoothing: antialiased;
-    list-style-type: none;
-    margin: -2.5rem;
-    margin-top: -3rem;
-    min-height: 42rem;
-    min-width: 15rem;
-    padding: 2.5rem;
-    padding-top: 6rem;
-    position: absolute;
-    transform: translate(-100%, 0);
+    .Wrapper input:checked ~ span {
+        background: var(--secondary-text-color);
+    }
 
-    transform-origin: 0% 0%;
+    .Menu {
+        background: var(--primary-text-color);
+        -webkit-font-smoothing: antialiased;
+        list-style-type: none;
+        margin: -2.5rem;
+        margin-top: -3rem;
+        min-height: 42rem;
+        min-width: 15rem;
+        padding: 2.5rem;
+        padding-top: 6rem;
+        position: absolute;
+        transform: translate(-100%, 0);
 
-    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
-}
+        transform-origin: 0% 0%;
 
-.Menu li {
-    font-size: 22px;
-    padding: 1.5rem;
-}
+        transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+    }
 
-.Wrapper input:checked ~ ul {
-    transform: none;
+    .Menu li {
+        font-size: 22px;
+        padding: 1.5rem;
+    }
+
+    .Wrapper input:checked ~ ul {
+        transform: none;
+    }
 }
