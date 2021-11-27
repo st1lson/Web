@@ -25,7 +25,7 @@ export default class Form extends PureComponent {
     }
 
     componentDidUpdate = () => {
-        if (this.props.data) {
+        if (this.props?.data) {
             const todos = this.props.data.todo;
             this.setState({
                 todos,
@@ -58,7 +58,7 @@ export default class Form extends PureComponent {
         startFetchQuery('delete', { Task: item['Task'] }).then(result => {
             if (result[0]?.message) {
                 this.setState({
-                    error: <p error="true">{result[0].message}</p>,
+                    error: <p error="true">{result[0]?.message}</p>,
                     isError: true,
                 });
             }
@@ -79,7 +79,7 @@ export default class Form extends PureComponent {
         startFetchQuery('add', { Task: { Task: newTodo } }).then(result => {
             if (result[0]?.message) {
                 this.setState({
-                    error: <p error="true">{result[0].message}</p>,
+                    error: <p error="true">{result[0]?.message}</p>,
                     isError: true,
                 });
             }
@@ -115,7 +115,7 @@ export default class Form extends PureComponent {
         }).then(result => {
             if (result[0]?.message) {
                 this.setState({
-                    error: <p error="true">{result[0].message}</p>,
+                    error: <p error="true">{result[0]?.message}</p>,
                     isError: true,
                 });
             }
@@ -145,7 +145,7 @@ export default class Form extends PureComponent {
         }).then(result => {
             if (result[0]?.message) {
                 this.setState({
-                    error: <p error="true">{result[0].message}</p>,
+                    error: <p error="true">{result[0]?.message}</p>,
                     isError: true,
                 });
             }
