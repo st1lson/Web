@@ -11,56 +11,63 @@ body {
     background-color: var(--background-color);
     color: var(--primary-text-color);
     margin: 0;
+    padding: 0;
     width: 100%;
 }
 
 header {
     align-items: center;
-    border-bottom: 0.15rem solid var(--border-color);
-    display: flex;
-    font-size: 36px;
-    font-weight: 300;
-    height: 10rem;
-    justify-content: center;
+    display: block;
+    height: 9rem;
+    justify-content: left;
     text-align: center;
     width: 100%;
 }
 
-@media screen and (min-width: 900px) {
-    .Wrapper {
-        background-color: var(--primary-text-color);
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        min-width: 100%;
-    }
-
-    .Wrapper input {
-        display: block;
-        opacity: 0;
-        pointer-events: none;
-        z-index: 2;
-    }
-
-    .Wrapper a {
-        color: var(--secondary-text-color);
-        font-weight: bold;
-        text-decoration: none;
-    }
-
-    .Menu {
-        display: flex;
-        flex-direction: row;
-    }
-
-    .Menu li {
-        font-size: 2rem;
-        padding: 2rem;
-    }
+.wrapper {
+    background-color: var(--primary-text-color);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    min-width: 100%;
 }
 
-@media screen and (max-width: 900px) {
-    .Wrapper {
+.backdrop {
+    background-color: rgba(var(--background-color), 0.96);
+    bottom: 0;
+    display: none;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 0;
+}
+
+.wrapper input {
+    display: block;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.wrapper a {
+    color: var(--secondary-text-color);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.menu {
+    display: flex;
+    flex-direction: row;
+}
+
+.menu li {
+    font-size: 2rem;
+    padding: 2rem;
+}
+
+@media screen and (max-width: 600px) {
+    .wrapper {
         background-color: transparent;
         display: block;
         margin-top: 1.5rem;
@@ -69,32 +76,37 @@ header {
         z-index: 1;
     }
 
-    .Wrapper a {
+    .navbar-toggle:checked ~ .backdrop {
+        display: block;
+    }
+
+    .wrapper a {
         color: var(--secondary-text-color);
         font-weight: bold;
         text-decoration: none;
         transition: color 0.3s ease;
     }
 
-    .Wrapper a:hover {
+    .wrapper a:hover {
         color: var(--hover-text-color);
         text-decoration: none;
     }
 
-    .Wrapper input {
+    .wrapper input {
         cursor: pointer;
         display: block;
         height: 1.2rem;
         margin-left: 1rem;
 
         opacity: 0;
+        pointer-events: unset;
         position: absolute;
         -webkit-touch-callout: none;
         width: 2rem;
         z-index: 2;
     }
 
-    .Wrapper span {
+    .wrapper span {
         background: var(--primary-text-color);
         display: block;
         height: 0.3rem;
@@ -109,17 +121,19 @@ header {
         z-index: 1;
     }
 
-    .Wrapper input:checked ~ span {
+    .wrapper input:checked ~ span {
         background: var(--secondary-text-color);
     }
 
-    .Menu {
+    .menu {
         background: var(--primary-text-color);
+        display: flex;
+        flex-direction: column;
         -webkit-font-smoothing: antialiased;
         list-style-type: none;
         margin: -2.5rem;
         margin-top: -3rem;
-        min-height: 42rem;
+        min-height: 47rem;
         min-width: 15rem;
         padding: 2.5rem;
         padding-top: 6rem;
@@ -131,12 +145,12 @@ header {
         transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
     }
 
-    .Menu li {
+    .menu li {
         font-size: 22px;
         padding: 1.5rem;
     }
 
-    .Wrapper input:checked ~ ul {
+    .wrapper input:checked ~ ul {
         transform: none;
     }
 }

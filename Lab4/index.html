@@ -8,18 +8,22 @@
     </head>
     <body>
         <header>
-            <h1>Tasty burger</h1>
-        </header>
-        <main>
-            <nav class="BurgerMenu">
-                <div class="Wrapper">
-                    <input type="checkbox" />
+            <nav class="burger-menu">
+                <div class="wrapper">
+                    <input
+                        id="navbar-toggle"
+                        class="navbar-toggle"
+                        type="checkbox"
+                        name="navbar-toggle"
+                    />
+
+                    <label class="backdrop" for="navbar-toggle"></label>
 
                     <span></span>
                     <span></span>
                     <span></span>
 
-                    <ul class="Menu">
+                    <ul class="menu">
                         <li>
                             <a href="#">Homepage</a>
                         </li>
@@ -38,6 +42,9 @@
                     </ul>
                 </div>
             </nav>
+        </header>
+        <main>
+            <div class="slider"></div>
         </main>
     </body>
 </html>
