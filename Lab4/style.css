@@ -66,6 +66,10 @@ header {
     padding: 2rem;
 }
 
+.slider {
+    
+}
+
 @media screen and (max-width: 600px) {
     .wrapper {
         background-color: transparent;
