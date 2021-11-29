@@ -22,14 +22,32 @@ export default class Form extends PureComponent {
             elementInEdit: '',
             editedElement: '',
         };
+
+        this.readData();
     }
+
+    readData = () => {
+        let todos = [];
+        this.setState({ isLoading: true });
+
+        startFetchQuery('read', {}).then(result => {
+            if (result[0]?.message) {
+                this.setState({
+                    error: <p error="true">{result[0]?.message}</p>,
+                    isError: true,
+                });
+            }
+
+            todos = result?.todo;
+            this.setState({ todos, isLoading: false });
+        });
+    };
 
     componentDidUpdate = () => {
         if (this.props?.data) {
             const todos = this.props.data.todo;
             this.setState({
                 todos,
-                isLoading: false,
             });
         }
     };
@@ -53,6 +71,7 @@ export default class Form extends PureComponent {
         this.setState({
             todos: [...todos],
             toDelete: item,
+            isLoading: true,
         });
 
         startFetchQuery('delete', { Task: item['Task'] }).then(result => {
@@ -62,6 +81,8 @@ export default class Form extends PureComponent {
                     isError: true,
                 });
             }
+
+            this.setState({ isLoading: false });
         });
     };
 
@@ -74,6 +95,7 @@ export default class Form extends PureComponent {
 
         this.setState({
             todos: [...todos],
+            isLoading: true,
         });
 
         startFetchQuery('add', { Task: { Task: newTodo } }).then(result => {
@@ -83,6 +105,8 @@ export default class Form extends PureComponent {
                     isError: true,
                 });
             }
+
+            this.setState({ isLoading: false });
         });
     };
 
@@ -107,6 +131,7 @@ export default class Form extends PureComponent {
 
         this.setState({
             todos: [...todos],
+            isLoading: true,
         });
 
         startFetchQuery('check', {
@@ -119,6 +144,8 @@ export default class Form extends PureComponent {
                     isError: true,
                 });
             }
+
+            this.setState({ isLoading: false });
         });
     };
 
