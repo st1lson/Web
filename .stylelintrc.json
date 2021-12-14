@@ -1,17 +1,9 @@
 {
-    "extends": [
-        "stylelint-config-sass-guidelines",
-        "stylelint-config-prettier"
-    ],
+    "extends": ["stylelint-config-prettier"],
     "plugins": ["stylelint-declaration-use-variable"],
     "rules": {
-        "max-nesting-depth": 2,
-        "sh-waqar/declaration-use-variable": [
-            [
-                "/color/",
-                { "ignoreValues": ["transparent", "inherit", "/rgba/"] }
-            ]
-        ],
-        "selector-class-pattern": null
+        "indentation": 4,
+        "number-leading-zero": null,
+        "no-missing-end-of-source-newline": true
     }
 }
