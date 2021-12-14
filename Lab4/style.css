@@ -4,6 +4,7 @@
     --primary-text-color: #fff;
     --secondary-text-color: #000;
     --hover-text-color: #7a6fa5;
+    --button-background-color: #e6e6e6;
 }
 
 html,
@@ -64,10 +65,6 @@ header {
 .menu li {
     font-size: 2rem;
     padding: 2rem;
-}
-
-.slider {
-    
 }
 
 @media screen and (max-width: 600px) {
@@ -156,5 +153,231 @@ header {
 
     .wrapper input:checked ~ ul {
         transform: none;
+    }
+}
+
+.slider-cta {
+    margin: 0;
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.slider {
+    margin: 0 15rem;
+    padding-top: 5rem;
+    position: relative;
+}
+.slider .btn {
+    background-color: transparent;
+    border: 1px solid var(--primary-text-color);
+    border-radius: 5px;
+    color: var(--primary-text-color);
+    font-size: 2rem;
+    font-weight: bold;
+    height: 4rem;
+    line-height: 4rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: 0.1s;
+    user-select: none;
+    width: 2.5rem;
+    z-index: 0;
+}
+
+.slider .btn:hover {
+    background-color: var(--button-background-color);
+    border: 1.5px solid var(--secondary-text-color);
+    color: var(--secondary-text-color);
+    opacity: 0.7;
+}
+
+.slider .btn .btn-label {
+    cursor: pointer;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+}
+
+.slider .btn-left {
+    left: 0.5rem;
+    z-index: 1;
+}
+
+.slider .btn-right {
+    right: 0.5rem;
+    z-index: 1;
+}
+
+.slider [type='radio'] {
+    display: none;
+}
+
+@media screen and (max-width: 100rem) {
+    .slider {
+        margin: 0 10rem;
+    }
+}
+
+@media screen and (max-width: 81.25rem) {
+    .slider {
+        margin: 0 5rem;
+    }
+}
+
+@media screen and (max-width: 62.5rem) {
+    .slider {
+        margin: 0;
+    }
+}
+
+.label-bars-container {
+    display: flex;
+    height: 1rem;
+    justify-content: space-between;
+    padding-bottom: 0.5rem;
+    width: 100%;
+}
+
+.label-bars-container .label-bar {
+    background-color: var(--button-background-color);
+    border: 2px solid var(--primary-text-color);
+    border-radius: 10px;
+    cursor: pointer;
+    flex: 1 1;
+    margin-right: 1rem;
+}
+
+.label-bars-container .label-bar:last-of-type {
+    margin: 0;
+}
+
+.slide1:checked ~ .slider-visible .slider-content {
+    transform: translateX(0);
+}
+
+.slide1:checked ~ .label-bars-container .label-bar[for='slide1'] {
+    background-color: rgba(var(--background-color), 0.96);
+}
+
+.slide1:checked ~ .btn-left .btn-label-left[for='slide4'] {
+    z-index: 1;
+}
+
+.slide1:checked ~ .btn-right .btn-label-right[for='slide2'] {
+    z-index: 1;
+}
+
+.slide2:checked ~ .slider-visible .slider-content {
+    transform: translateX(-25%);
+}
+
+.slide2:checked ~ .label-bars-container .label-bar[for='slide2'] {
+    background-color: rgba(var(--background-color), 0.96);
+}
+
+.slide2:checked ~ .btn-left .btn-label-left[for='slide1'] {
+    z-index: 1;
+}
+
+.slide2:checked ~ .btn-right .btn-label-right[for='slide3'] {
+    z-index: 1;
+}
+
+.slide3:checked ~ .slider-visible .slider-content {
+    transform: translateX(-50%);
+}
+
+.slide3:checked ~ .label-bars-container .label-bar[for='slide3'] {
+    background-color: rgba(var(--background-color), 0.96);
+}
+
+.slide3:checked ~ .btn-left .btn-label-left[for='slide2'] {
+    z-index: 1;
+}
+
+.slide3:checked ~ .btn-right .btn-label-right[for='slide4'] {
+    z-index: 1;
+}
+
+.slide4:checked ~ .slider-visible .slider-content {
+    transform: translateX(-75%);
+}
+
+.slide4:checked ~ .label-bars-container .label-bar[for='slide4'] {
+    background-color: rgba(var(--background-color), 0.96);
+}
+
+.slide4:checked ~ .btn-left .btn-label-left[for='slide3'] {
+    z-index: 1;
+}
+
+.slide4:checked ~ .btn-right .btn-label-right[for='slide1'] {
+    z-index: 1;
+}
+
+.swipe-cta {
+    display: none;
+    font-size: 1rem;
+    font-weight: bold;
+    margin: auto;
+    text-align: center;
+    width: 70%;
+}
+
+.swipe-cta span {
+    font-size: 2rem;
+}
+
+.slider-visible {
+    height: 50rem;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.slider-content {
+    bottom: 0;
+    display: flex;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: transform 1s;
+    width: 400%;
+}
+
+.slider-content .slide {
+    background-position: center;
+    background-size: cover;
+    flex: 1 1;
+    height: 100%;
+}
+
+.slider-content .slide:nth-of-type(1) {
+    background-image: url('https://images5.alphacoders.com/764/thumb-1920-764519.jpg');
+}
+
+.slider-content .slide:nth-of-type(2) {
+    background-image: url('https://wallpapersmug.com/large/b408b5/king-overlord-anime-art.jpg');
+}
+
+.slider-content .slide:nth-of-type(3) {
+    background-image: url('https://i2.wp.com/ikigaipop.com/wp-content/uploads/2021/05/Overlord-Season-4-1200x675-1.png?fit=1200%2C675&ssl=1');
+}
+
+.slider-content .slide:nth-of-type(4) {
+    background-image: url('https://assets-prd.ignimgs.com/2021/12/12/cowboy-bebop-blogroll-1571441148911-1639323480366.jpg');
+}
+
+@keyframes burger-menu-translation {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
     }
 }
