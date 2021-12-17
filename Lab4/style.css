@@ -159,17 +159,12 @@ header {
     }
 }
 
-.slider-cta {
-    margin: 0;
-    padding: 2rem 0;
-    text-align: center;
-}
-
 .slider {
     margin: 0 15rem;
     padding-top: 5rem;
     position: relative;
 }
+
 .slider .btn {
     background-color: transparent;
     border: 1px solid var(--primary-text-color);
