@@ -128,21 +128,20 @@ header {
 
     .menu {
         background: var(--primary-text-color);
-        display: flex;
+        display: block;
         flex-direction: column;
         -webkit-font-smoothing: antialiased;
         list-style-type: none;
+        top: 0;
+        bottom: 0;
         margin: -2.5rem;
         margin-top: -3rem;
-        min-height: 47rem;
         min-width: 15rem;
         padding: 2.5rem;
         padding-top: 6rem;
-        position: absolute;
+        position: fixed;
         transform: translate(-100%, 0);
-
         transform-origin: 0% 0%;
-
         transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
     }
 
