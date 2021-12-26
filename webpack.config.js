@@ -2,19 +2,18 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const NodePoyfillWebpackPlugin = require('node-polyfill-webpack-plugin');
 const path = require('path');
-const { DefinePlugin } = require('webpack');
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
-    entry: './Lab3/client/src/index.js',
+    entry: './Lab5/client/src/index.js',
     output: {
         filename: 'bundle.[hash].js',
-        path: path.resolve(__dirname, './Lab3/client/dist'),
+        path: path.resolve(__dirname, './Lab5/client/dist'),
     },
     plugins: [
         new NodePoyfillWebpackPlugin(),
         new HtmlWebpackPlugin({
-            template: './Lab3/client/src/index.html',
+            template: './Lab5/client/src/index.html',
         }),
         new Dotenv({
             systemvars: true,
@@ -32,9 +31,9 @@ module.exports = {
             child_process: false,
         },
         alias: {
-            '@components': path.join(__dirname, 'Lab3/client/src/components'),
-            '@GraphQL': path.join(__dirname, 'Lab3/client/src/GraphQL'),
-            '@Layout': path.join(__dirname, 'Lab3/client/src/Layout'),
+            '@components': path.join(__dirname, 'Lab5/client/src/components'),
+            '@GraphQL': path.join(__dirname, 'Lab5/client/src/GraphQL'),
+            '@Layout': path.join(__dirname, 'Lab5/client/src/Layout'),
         },
     },
     module: {

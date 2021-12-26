@@ -1,6 +1,6 @@
 {
     "hosting": {
-        "public": "Lab3/dist",
+        "public": "Lab5/client/dist",
         "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
         "rewrites": [
             {
@@ -8,5 +8,8 @@
                 "destination": "/index.html"
             }
         ]
+    },
+    "functions": {
+        "source": "Lab5/functions"
     }
 }

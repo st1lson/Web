@@ -1,0 +1,13 @@
+header {
+    min-height: 5rem;
+    max-height: 10rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    h1 {
+        text-align: center;
+        left: 50%;
+    }
+}
