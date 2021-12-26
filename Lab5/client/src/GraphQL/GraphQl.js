@@ -1,7 +1,15 @@
 import { HASURA_ADMIN_SECRET, URI } from '@GraphQL/config';
 
-export default async function startFetchQuery(request, variables) {
+let headers;
+let isIn;
+
+export default async function startFetchQuery(request, variables, authState) {
+    isIn = authState?.status === 'in';
+    headers = isIn ? { Authorization: `Bearer ${authState?.token}` } : {};
+
     const { errors, data } = await fetchQuery(request, variables);
+
+    console.log(data);
 
     if (errors) {
         return errors;
@@ -52,7 +60,7 @@ async function fetchQuery(request, variables) {
 
 async function fetchGraphQL(operationsDoc, operationName, variables) {
     const result = await fetch(URI, {
-        headers: setHeaders(),
+        headers,
         method: 'POST',
         body: JSON.stringify({
             query: operationsDoc,
@@ -69,5 +77,6 @@ export function setHeaders() {
     return {
         'content-type': 'application/json',
         'x-hasura-admin-secret': HASURA_ADMIN_SECRET,
+        'x-hasura-role': 'user',
     };
 }

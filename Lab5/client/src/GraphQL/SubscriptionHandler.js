@@ -31,7 +31,6 @@ const wsLink = new WebSocketLink({
 });
 
 const authLink = setContext((_, { headers }) => {
-    console.log(authState.token);
     return {
         headers: {
             ...headers,
@@ -64,6 +63,8 @@ const tasksSubscriptions = gql`
 `;
 
 export default function SubscriptionResult() {
+    console.log(authState);
+
     const { data } = useSubscription(tasksSubscriptions, {
         UserId: authState?.user?.uid,
     });

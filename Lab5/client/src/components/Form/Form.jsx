@@ -30,7 +30,7 @@ export default class Form extends PureComponent {
         let todos = [];
         this.setState({ isLoading: true });
 
-        startFetchQuery('read', {}).then(result => {
+        startFetchQuery('read', {}, this.props.authState).then(result => {
             if (result[0]?.message) {
                 this.setState({
                     error: <p error="true">{result[0]?.message}</p>,
@@ -74,7 +74,11 @@ export default class Form extends PureComponent {
             isLoading: true,
         });
 
-        startFetchQuery('delete', { Task: item['Task'] }).then(result => {
+        startFetchQuery(
+            'delete',
+            { Task: item['Task'] },
+            this.props.authState,
+        ).then(result => {
             if (result[0]?.message) {
                 this.setState({
                     error: <p error="true">{result[0]?.message}</p>,
@@ -98,7 +102,11 @@ export default class Form extends PureComponent {
             isLoading: true,
         });
 
-        startFetchQuery('add', { Task: { Task: newTodo } }).then(result => {
+        startFetchQuery(
+            'add',
+            { Task: { Task: newTodo } },
+            this.props.authState,
+        ).then(result => {
             if (result[0]?.message) {
                 this.setState({
                     error: <p error="true">{result[0]?.message}</p>,
@@ -134,10 +142,14 @@ export default class Form extends PureComponent {
             isLoading: true,
         });
 
-        startFetchQuery('check', {
-            Task: element['Task'],
-            Checked: element['Checked'],
-        }).then(result => {
+        startFetchQuery(
+            'check',
+            {
+                Task: element['Task'],
+                Checked: element['Checked'],
+            },
+            this.props.authState,
+        ).then(result => {
             if (result[0]?.message) {
                 this.setState({
                     error: <p error="true">{result[0]?.message}</p>,
@@ -166,10 +178,14 @@ export default class Form extends PureComponent {
             return;
         }
 
-        startFetchQuery('update', {
-            oldTask: elementInEdit,
-            newTask: editedElement,
-        }).then(result => {
+        startFetchQuery(
+            'update',
+            {
+                oldTask: elementInEdit,
+                newTask: editedElement,
+            },
+            this.props.authState,
+        ).then(result => {
             if (result[0]?.message) {
                 this.setState({
                     error: <p error="true">{result[0]?.message}</p>,
