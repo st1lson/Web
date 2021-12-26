@@ -30,17 +30,27 @@ export default class Form extends PureComponent {
         let todos = [];
         this.setState({ isLoading: true });
 
-        startFetchQuery('read', {}, this.props.authState).then(result => {
-            if (result[0]?.message) {
-                this.setState({
-                    error: <p error="true">{result[0]?.message}</p>,
-                    isError: true,
-                });
-            }
+        startFetchQuery('read', {}, this.props.authState)
+            .then(result => {
+                if (result[0]?.message) {
+                    this.setState({
+                        error: <p error="true">{result[0]?.message}</p>,
+                        isError: true,
+                    });
+                }
 
-            todos = result?.todo;
-            this.setState({ todos, isLoading: false });
-        });
+                todos = result?.todo;
+                this.setState({ todos, isLoading: false });
+            })
+            .catch(error => {
+                if (error) {
+                    this.setState({
+                        error: <p error="true">Something going wrong...</p>,
+                        isError: true,
+                        isLoading: false,
+                    });
+                }
+            });
     };
 
     componentDidUpdate = () => {
@@ -67,27 +77,32 @@ export default class Form extends PureComponent {
         const index = todos.map(e => e.Task).indexOf(element);
         const item = todos[index];
 
-        todos.splice(index, 1);
         this.setState({
             todos: [...todos],
             toDelete: item,
             isLoading: true,
         });
 
-        startFetchQuery(
-            'delete',
-            { Task: item['Task'] },
-            this.props.authState,
-        ).then(result => {
-            if (result[0]?.message) {
-                this.setState({
-                    error: <p error="true">{result[0]?.message}</p>,
-                    isError: true,
-                });
-            }
+        startFetchQuery('delete', { Task: item['Task'] }, this.props.authState)
+            .then(result => {
+                if (result[0]?.message) {
+                    this.setState({
+                        error: <p error="true">{result[0]?.message}</p>,
+                        isError: true,
+                    });
+                }
 
-            this.setState({ isLoading: false });
-        });
+                this.setState({ isLoading: false });
+            })
+            .catch(error => {
+                if (error) {
+                    this.setState({
+                        error: <p error="true">Something going wrong...</p>,
+                        isError: true,
+                        isLoading: false,
+                    });
+                }
+            });
     };
 
     onTodoAdd = event => {
@@ -106,16 +121,26 @@ export default class Form extends PureComponent {
             'add',
             { Task: { Task: newTodo } },
             this.props.authState,
-        ).then(result => {
-            if (result[0]?.message) {
-                this.setState({
-                    error: <p error="true">{result[0]?.message}</p>,
-                    isError: true,
-                });
-            }
+        )
+            .then(result => {
+                if (result[0]?.message) {
+                    this.setState({
+                        error: <p error="true">{result[0]?.message}</p>,
+                        isError: true,
+                    });
+                }
 
-            this.setState({ isLoading: false });
-        });
+                this.setState({ isLoading: false });
+            })
+            .catch(error => {
+                if (error) {
+                    this.setState({
+                        error: <p error="true">Something going wrong...</p>,
+                        isError: true,
+                        isLoading: false,
+                    });
+                }
+            });
     };
 
     onTodoEdit = (event, element) => {
@@ -149,16 +174,26 @@ export default class Form extends PureComponent {
                 Checked: element['Checked'],
             },
             this.props.authState,
-        ).then(result => {
-            if (result[0]?.message) {
-                this.setState({
-                    error: <p error="true">{result[0]?.message}</p>,
-                    isError: true,
-                });
-            }
+        )
+            .then(result => {
+                if (result[0]?.message) {
+                    this.setState({
+                        error: <p error="true">{result[0]?.message}</p>,
+                        isError: true,
+                    });
+                }
 
-            this.setState({ isLoading: false });
-        });
+                this.setState({ isLoading: false });
+            })
+            .catch(error => {
+                if (error) {
+                    this.setState({
+                        error: <p error="true">Something going wrong...</p>,
+                        isError: true,
+                        isLoading: false,
+                    });
+                }
+            });
     };
 
     onSubmit = event => {
@@ -185,14 +220,24 @@ export default class Form extends PureComponent {
                 newTask: editedElement,
             },
             this.props.authState,
-        ).then(result => {
-            if (result[0]?.message) {
-                this.setState({
-                    error: <p error="true">{result[0]?.message}</p>,
-                    isError: true,
-                });
-            }
-        });
+        )
+            .then(result => {
+                if (result[0]?.message) {
+                    this.setState({
+                        error: <p error="true">{result[0]?.message}</p>,
+                        isError: true,
+                    });
+                }
+            })
+            .catch(error => {
+                if (error) {
+                    this.setState({
+                        error: <p error="true">Something going wrong...</p>,
+                        isError: true,
+                        isLoading: false,
+                    });
+                }
+            });
 
         this.setState({
             todos,

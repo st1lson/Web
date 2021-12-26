@@ -9,8 +9,6 @@ export default async function startFetchQuery(request, variables, authState) {
 
     const { errors, data } = await fetchQuery(request, variables);
 
-    console.log(data);
-
     if (errors) {
         return errors;
     }

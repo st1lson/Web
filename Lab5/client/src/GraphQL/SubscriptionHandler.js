@@ -63,8 +63,6 @@ const tasksSubscriptions = gql`
 `;
 
 export default function SubscriptionResult() {
-    console.log(authState);
-
     const { data } = useSubscription(tasksSubscriptions, {
         UserId: authState?.user?.uid,
     });
