@@ -42,14 +42,12 @@ export default class Form extends PureComponent {
                 todos = result?.todo;
                 this.setState({ todos, isLoading: false });
             })
-            .catch(error => {
-                if (!error) {
-                    this.setState({
-                        error: <p error="true">Something going wrong...</p>,
-                        isError: true,
-                        isLoading: false,
-                    });
-                }
+            .catch(() => {
+                this.setState({
+                    error: <p error="true">Something going wrong...</p>,
+                    isError: true,
+                    isLoading: false,
+                });
             });
     };
 
@@ -94,14 +92,12 @@ export default class Form extends PureComponent {
 
                 this.setState({ isLoading: false });
             })
-            .catch(error => {
-                if (error) {
-                    this.setState({
-                        error: <p error="true">Something going wrong...</p>,
-                        isError: true,
-                        isLoading: false,
-                    });
-                }
+            .catch(() => {
+                this.setState({
+                    error: <p error="true">Something going wrong...</p>,
+                    isError: true,
+                    isLoading: false,
+                });
             });
     };
 
@@ -132,14 +128,12 @@ export default class Form extends PureComponent {
 
                 this.setState({ isLoading: false });
             })
-            .catch(error => {
-                if (error) {
-                    this.setState({
-                        error: <p error="true">Something going wrong...</p>,
-                        isError: true,
-                        isLoading: false,
-                    });
-                }
+            .catch(() => {
+                this.setState({
+                    error: <p error="true">Something going wrong...</p>,
+                    isError: true,
+                    isLoading: false,
+                });
             });
     };
 
@@ -185,17 +179,15 @@ export default class Form extends PureComponent {
 
                 this.setState({ isLoading: false });
             })
-            .catch(error => {
-                if (error) {
-                    element['Checked'] = !element['Checked'];
-                    todos[index] = element;
-                    this.setState({
-                        todos: [...todos],
-                        error: <p error="true">Something going wrong...</p>,
-                        isError: true,
-                        isLoading: false,
-                    });
-                }
+            .catch(() => {
+                element['Checked'] = !element['Checked'];
+                todos[index] = element;
+                this.setState({
+                    todos: [...todos],
+                    error: <p error="true">Something going wrong...</p>,
+                    isError: true,
+                    isLoading: false,
+                });
             });
     };
 
@@ -232,14 +224,12 @@ export default class Form extends PureComponent {
                     });
                 }
             })
-            .catch(error => {
-                if (error) {
-                    this.setState({
-                        error: <p error="true">Something going wrong...</p>,
-                        isError: true,
-                        isLoading: false,
-                    });
-                }
+            .catch(() => {
+                this.setState({
+                    error: <p error="true">Something going wrong...</p>,
+                    isError: true,
+                    isLoading: false,
+                });
             });
 
         this.setState({
