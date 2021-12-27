@@ -75,5 +75,8 @@
         "reactstrap": "^8.10.0",
         "regenerator-runtime": "^0.13.9",
         "web-vitals": "^2.1.1"
+    },
+    "optionalDependencies": {
+        "fsevents": "^2.3.2"
     }
 }
