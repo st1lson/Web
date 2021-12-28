@@ -10,6 +10,10 @@ jobs:
         steps:
             - uses: actions/checkout@v2
             - run: npm ci && npm run build
+              env:
+                  CI: true
+                  GRAPHQL_ENDPOINT: ${{ secrets.GRAPHQL_ENDPOINT }}
+                  X_HASURA_ADMIN_SECRET: ${{ secrets.X_HASURA_ADMIN_SECRET }}
             - uses: FirebaseExtended/action-hosting-deploy@v0
               with:
                   repoToken: '${{ secrets.GITHUB_TOKEN }}'
