@@ -28,13 +28,12 @@ class Auth extends React.PureComponent {
     componentDidMount() {
         this.setState({ provider: new firebase.auth.GoogleAuthProvider() });
         firebase.initializeApp({
-            apiKey: 'AIzaSyACE-Y0Gtprv7mTSvEYlsLWT-wEoDhWiwk',
-            authDomain: 'auth-lab5.firebaseapp.com',
-            databaseURL:
-                'https://auth-lab5-default-rtdb.europe-west1.firebasedatabase.app',
-            projectId: 'auth-lab5',
-            storageBucket: 'auth-lab5.appspot.com',
-            messagingSenderId: '531262301326',
+            apiKey: process.env.API_KEY,
+            authDomain: process.env.AUTH_DOMAIN,
+            databaseURL: process.env.DB_URL,
+            projectId: process.env.PROJECT_ID,
+            storageBucket: process.env.STORAGE_BUCKET,
+            messagingSenderId: process.env.MESSAGING_SENDER,
         });
         firebase.auth().onAuthStateChanged(async user => {
             if (user) {
@@ -42,8 +41,7 @@ class Auth extends React.PureComponent {
                 const idTokenResult = await user.getIdTokenResult();
                 const hasuraClaim =
                     idTokenResult.claims['https://hasura.io/jwt/claims'];
-                this.props.authState.token = token;
-                this.props.authState.user = user;
+                this.props.changeToken(token);
                 if (hasuraClaim) {
                     this.setState({ authState: { status: 'in', user, token } });
                 } else {

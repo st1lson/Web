@@ -1,12 +1,6 @@
 import React from 'react';
-import SubscriptionResult from '@GraphQL/SubscriptionHandler';
-import { ApolloProvider } from '@apollo/client';
-import { apolloClient } from '@GraphQL/SubscriptionHandler';
+import Subscription from './GraphQL/SubscriptionHandler';
 
-const App = () => (
-    <ApolloProvider client={apolloClient}>
-        <SubscriptionResult />
-    </ApolloProvider>
-);
+const App = () => <Subscription />;
 
 export default App;

@@ -1,57 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     ApolloClient,
     InMemoryCache,
-    split,
+    concat,
     useSubscription,
+    ApolloProvider,
 } from '@apollo/client';
-import { getMainDefinition } from '@apollo/client/utilities';
-import { HttpLink } from 'apollo-link-http';
 import { WebSocketLink } from '@apollo/client/link/ws';
 import gql from 'graphql-tag';
 import Auth from '@components/Auth/Auth';
-import { setHeaders } from '@GraphQL/GraphQl';
 import { setContext } from '@apollo/client/link/context';
-import { URI, URI_WSS } from '@GraphQL/config';
+import { URI_WSS } from '@GraphQL/config';
 
 const authState = { token: '' };
-
-const httpLink = new HttpLink({
-    uri: URI,
-});
-
-const wsLink = new WebSocketLink({
-    uri: URI_WSS,
-    options: {
-        reconnect: true,
-        connectionParams: {
-            headers: setHeaders(),
-        },
-    },
-});
-
-const authLink = setContext((_, { headers }) => {
-    return {
-        headers: {
-            ...headers,
-            Authorization: `Bearer ${authState?.token}`,
-        },
-    };
-});
-
-const link = split(
-    ({ query }) => {
-        const { kind, operation } = getMainDefinition(query);
-        return kind === 'OperationDefinition' && operation === 'subscription';
-    },
-    wsLink,
-    authLink.concat(httpLink),
-);
-
-export const apolloClient = new ApolloClient({
-    cache: new InMemoryCache(),
-    link,
-});
 
 const tasksSubscriptions = gql`
     subscription Subscription {
@@ -62,14 +23,71 @@ const tasksSubscriptions = gql`
     }
 `;
 
-export default function SubscriptionResult() {
+export function SubscriptionResult(props) {
+    const { changeToken } = props;
+
     const { data } = useSubscription(tasksSubscriptions, {
         UserId: authState?.user?.uid,
     });
 
     return (
         <>
-            <Auth authState={authState} data={data} />
+            <Auth changeToken={changeToken} authState={authState} data={data} />
         </>
     );
 }
+
+function Subscription() {
+    const [bearerToken, setBearerToken] = useState('');
+
+    const authLink = setContext((_, { headers }) => {
+        if (!bearerToken) return { headers };
+
+        return {
+            headers: {
+                ...headers,
+                Authorization: `Bearer ${bearerToken}`,
+            },
+        };
+    });
+
+    const wsLink = new WebSocketLink({
+        uri: URI_WSS,
+        options: {
+            reconnect: true,
+            connectionParams: () => {
+                return {
+                    headers: {
+                        Authorization: `Bearer ${bearerToken}`,
+                    },
+                };
+            },
+        },
+    });
+
+    const client = new ApolloClient({
+        link: concat(authLink, wsLink),
+        cache: new InMemoryCache({
+            typePolicies: {
+                Subscription: {
+                    fields: {
+                        todos: {
+                            merge: false,
+                        },
+                    },
+                },
+            },
+        }),
+    });
+    return (
+        <ApolloProvider client={client}>
+            <SubscriptionResult
+                changeToken={token => {
+                    setBearerToken(token);
+                }}
+            />
+        </ApolloProvider>
+    );
+}
+
+export default Subscription;
