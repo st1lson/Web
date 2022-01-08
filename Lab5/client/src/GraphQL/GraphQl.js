@@ -19,14 +19,15 @@ export default async function startFetchQuery(request, variables, authState) {
 const operationsDoc = `
    query read {
         todo {
+            Id
             Task
             Checked
         }
     }
 
-    mutation delete($Task: String!) {
-        delete_todo_by_pk(Task: $Task) {
-            Task
+    mutation delete($Id: Int) {
+        delete_todo(where: {Id: {_eq: $Id}}) {
+          affected_rows
         }
     }
 
@@ -36,19 +37,17 @@ const operationsDoc = `
         }
     }
 
-    mutation update($oldTask: String!, $newTask: String!) {
-        update_todo_by_pk(pk_columns: {Task: $oldTask}, 
-             _set: {Task: $newTask}) {
-            Task
-          }
+    mutation update($Id: Int!, $newTask: String!) {
+        update_todo(where: {Id: {_eq: $Id}}, _set: {Task: $newTask}) {
+            affected_rows
+        }
     }
 
-    mutation check($Task: String!, 
-        $Checked: Boolean!) {
-        update_todo_by_pk(pk_columns: {Task: $Task},
-             _set: {Checked: $Checked}) {
-            Checked
-          }
+    mutation check($Id: Int!, $Checked: Boolean!) {
+        update_todo_by_pk(pk_columns: {Id: $Id},
+            _set: {Checked: $Checked}) {
+           Checked
+        }
     }
 `;
 

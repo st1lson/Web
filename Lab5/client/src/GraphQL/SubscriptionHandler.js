@@ -16,7 +16,8 @@ const authState = { token: '' };
 
 const tasksSubscriptions = gql`
     subscription Subscription {
-        todo(order_by: { Task: asc, Checked: asc }) {
+        todo(order_by: { Id: asc, Task: asc, Checked: asc }) {
+            Id
             Task
             Checked
         }

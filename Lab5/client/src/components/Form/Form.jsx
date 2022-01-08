@@ -15,11 +15,12 @@ export default class Form extends PureComponent {
             newTodo: '',
             todos: [],
             error: '',
-            toDelete: '',
+            toDeleteId: 0,
             isLoading: true,
             isError: false,
             inEdit: false,
-            elementInEdit: '',
+            elementInEdit: 0,
+            elementId: 0,
             editedElement: '',
         };
 
@@ -40,6 +41,7 @@ export default class Form extends PureComponent {
                 }
 
                 todos = result?.todo;
+                console.log(todos);
                 this.setState({ todos, isLoading: false });
             })
             .catch(() => {
@@ -54,6 +56,7 @@ export default class Form extends PureComponent {
     componentDidUpdate = () => {
         if (this.props?.data) {
             const todos = this.props.data.todo;
+            console.log(todos);
             this.setState({
                 todos,
             });
@@ -72,16 +75,13 @@ export default class Form extends PureComponent {
     onTodoDelete = (event, element) => {
         const { todos } = this.state;
 
-        const index = todos.map(e => e.Task).indexOf(element);
-        const item = todos[index];
-
         this.setState({
             todos: [...todos],
-            toDelete: item,
+            toDelete: element,
             isLoading: true,
         });
 
-        startFetchQuery('delete', { Task: item['Task'] }, this.props.authState)
+        startFetchQuery('delete', { Id: element }, this.props.authState)
             .then(result => {
                 if (result[0]?.message) {
                     this.setState({
@@ -138,21 +138,17 @@ export default class Form extends PureComponent {
     };
 
     onTodoEdit = (event, element) => {
-        let { inEdit, elementInEdit } = this.state;
-
-        inEdit = true;
-        elementInEdit = element;
-
         this.setState({
-            inEdit,
-            elementInEdit,
+            inEdit: true,
+            elementInEdit: element['Task'],
+            elementId: element['Id'],
         });
     };
 
     onTodoCheck = (event, element) => {
         const { todos } = this.state;
 
-        const index = todos.indexOf(element['Task']);
+        const index = todos.indexOf(element['Id']);
         element['Checked'] = !element['Checked'];
         todos[index] = element;
 
@@ -164,7 +160,7 @@ export default class Form extends PureComponent {
         startFetchQuery(
             'check',
             {
-                Task: element['Task'],
+                Id: element['Id'],
                 Checked: element['Checked'],
             },
             this.props.authState,
@@ -196,11 +192,12 @@ export default class Form extends PureComponent {
     };
 
     onPopupClick = () => {
-        let { todos, inEdit, elementInEdit, editedElement } = this.state;
+        let { todos, inEdit, elementId, editedElement } = this.state;
 
         if (!editedElement) {
             this.setState({
                 inEdit: !inEdit,
+                elementId: 0,
                 elementInEdit: '',
                 editedElement: '',
             });
@@ -208,10 +205,11 @@ export default class Form extends PureComponent {
             return;
         }
 
+        console.log(editedElement);
         startFetchQuery(
             'update',
             {
-                oldTask: elementInEdit,
+                Id: elementId,
                 newTask: editedElement,
             },
             this.props.authState,
@@ -284,13 +282,13 @@ export default class Form extends PureComponent {
                     <div className={Style.TodoWrapper}>
                         {todos.map(element => (
                             <Todo
-                                key={element['Task']}
+                                key={element['Id']}
                                 checked={element['Checked']}
                                 onClickEdit={event =>
-                                    this.onTodoEdit(event, element['Task'])
+                                    this.onTodoEdit(event, element)
                                 }
                                 onClickDelete={event =>
-                                    this.onTodoDelete(event, element['Task'])
+                                    this.onTodoDelete(event, element['Id'])
                                 }
                                 onClickCheck={event =>
                                     this.onTodoCheck(event, element)
