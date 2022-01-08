@@ -41,7 +41,6 @@ export default class Form extends PureComponent {
                 }
 
                 todos = result?.todo;
-                console.log(todos);
                 this.setState({ todos, isLoading: false });
             })
             .catch(() => {
@@ -56,7 +55,6 @@ export default class Form extends PureComponent {
     componentDidUpdate = () => {
         if (this.props?.data) {
             const todos = this.props.data.todo;
-            console.log(todos);
             this.setState({
                 todos,
             });
@@ -205,7 +203,6 @@ export default class Form extends PureComponent {
             return;
         }
 
-        console.log(editedElement);
         startFetchQuery(
             'update',
             {
