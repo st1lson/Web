@@ -1,0 +1,31 @@
+.Wrapper {
+    width: 100%;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    margin-top: 1rem;
+    min-height: 3rem;
+    max-height: 3rem;
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 10px;
+
+    .TodoWrapper {
+        width: 90%;
+    }
+
+    button {
+        width: 10%;
+        color: rgb(255, 255, 255);
+        height: 3rem;
+        right: 0px;
+        border-radius: 10px;
+        background-color: transparent;
+        background-repeat: no-repeat;
+        border: none;
+        cursor: pointer;
+
+        &:hover {
+            background-color: rgb(92, 91, 91);
+        }
+    }
+}

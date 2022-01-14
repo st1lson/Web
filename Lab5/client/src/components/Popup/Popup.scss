@@ -1,0 +1,37 @@
+.Wrapper {
+    background-color: #23272a;
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 0.5rem;
+    color: rgb(255, 255, 255);
+    font-weight: 900;
+    left: 50%;
+    padding: 1.5rem;
+    position: fixed;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+
+    Input {
+        color: rgb(0, 0, 0);
+    }
+
+    .DismissWrapper {
+        text-align: center;
+    }
+
+    [success] {
+        color: rgb(0, 255, 0);
+    }
+
+    [error] {
+        color: rgb(255, 0, 0);
+    }
+
+    @media screen and (max-width: 600px) {
+        border-left: 0;
+        border-radius: 0;
+        border-right: 0;
+        text-align: center;
+        width: 100%;
+    }
+}
